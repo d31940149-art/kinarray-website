@@ -1,0 +1,83 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  frontmatter: {
+    title: string;
+    description: string;
+    pubDate: Date;
+    author?: string;
+    image?: string;
+    lang: 'en' | 'zh';
+  };
+}
+
+const { frontmatter } = Astro.props;
+const { title, description, pubDate, author, image, lang } = frontmatter;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description: description,
+  datePublished: pubDate.toISOString(),
+  author: {
+    '@type': 'Person',
+    name: author || 'Kinarray Team'
+  },
+  ...(image && { image: image })
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  image={image}
+  type="article"
+  publishedTime={pubDate.toISOString()}
+  author={author}
+  lang={lang}
+  schema={schema}
+>
+  <main class="max-w-4xl mx-auto px-4 py-12">
+    <article class="prose prose-lg max-w-none">
+      <header class="mb-8">
+        <h1 class="text-4xl font-bold mb-4">{title}</h1>
+        <div class="text-gray-600 text-sm">
+          {pubDate.toLocaleDateString(lang === 'en' ? 'en-US' : 'zh-CN', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          })}
+          {author && <span> · {author}</span>}
+        </div>
+      </header>
+
+      <div class="ai-summary bg-blue-50 border-l-4 border-blue-500 p-6 mb-8">
+        <h2 class="text-xl font-bold mb-2">{lang === 'en' ? 'TL;DR' : '核心要点'}</h2>
+        <slot name="summary" />
+      </div>
+
+      <div class="content">
+        <slot />
+      </div>
+    </article>
+
+    <div class="mt-12 bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-lg p-8 text-center">
+      <h3 class="text-2xl font-bold mb-4">
+        {lang === 'en' ? 'Learn More About Our Radar Solutions' : '了解我们的雷达解决方案'}
+      </h3>
+      <p class="mb-6">
+        {lang === 'en'
+          ? 'Discover how our deformation monitoring radar can help protect your infrastructure.'
+          : '了解我们的形变监测雷达如何帮助保护您的基础设施。'}
+      </p>
+      <a
+        href={`/${lang}/products/`}
+        class="inline-block bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
+      >
+        {lang === 'en' ? 'View Products' : '查看产品'}
+      </a>
+    </div>
+  </main>
+</BaseLayout>

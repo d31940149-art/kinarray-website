@@ -1,0 +1,64 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const lang = 'zh';
+const terms = await getCollection('glossary', ({ data }) => data.lang === lang);
+
+// Group terms by first character (for Chinese, we'll use pinyin first letter or just list all)
+const groupedTerms = terms.reduce((acc, term) => {
+  const firstChar = term.data.term[0];
+  if (!acc[firstChar]) acc[firstChar] = [];
+  acc[firstChar].push(term);
+  return acc;
+}, {} as Record<string, typeof terms>);
+
+// Sort each group
+Object.keys(groupedTerms).forEach(char => {
+  groupedTerms[char].sort((a, b) => a.data.term.localeCompare(b.data.term, 'zh-CN'));
+});
+
+const sortedChars = Object.keys(groupedTerms).sort((a, b) => a.localeCompare(b, 'zh-CN'));
+---
+
+<BaseLayout
+  title="术语库 - 形变监测术语 | Kinarray"
+  description="形变监测、雷达技术和基础设施安全相关技术术语的综合词汇表。"
+  lang={lang}
+>
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-4xl font-bold mb-4">技术术语库</h1>
+    <p class="text-gray-600 mb-8">
+      形变监测和雷达技术相关的关键术语和定义。
+    </p>
+
+    <!-- All Terms List -->
+    <div class="space-y-8">
+      {terms.sort((a, b) => a.data.term.localeCompare(b.data.term, 'zh-CN')).map(async (term) => {
+        const { Content } = await term.render();
+        return (
+          <article class="border-l-4 border-blue-500 pl-6">
+            <h3 class="text-xl font-bold mb-2">{term.data.term}</h3>
+            <p class="text-gray-700 mb-2">{term.data.definition}</p>
+            <div class="prose prose-sm text-gray-600">
+              <Content />
+            </div>
+            {term.data.relatedArticles && term.data.relatedArticles.length > 0 && (
+              <div class="mt-3">
+                <span class="text-sm text-gray-500">相关文章: </span>
+                {term.data.relatedArticles.map((slug, i) => (
+                  <>
+                    <a href={`/zh/blog/${slug}/`} class="text-sm text-blue-600 hover:underline">
+                      {slug}
+                    </a>
+                    {i < term.data.relatedArticles.length - 1 && <span class="text-gray-400">, </span>}
+                  </>
+                ))}
+              </div>
+            )}
+          </article>
+        );
+      })}
+    </div>
+  </main>
+</BaseLayout>

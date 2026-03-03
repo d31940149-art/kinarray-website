@@ -1,0 +1,102 @@
+---
+import { getCollection } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+export const getStaticPaths = (async () => {
+  const products = await getCollection('products');
+  return products.map(product => ({
+    params: { slug: product.slug },
+    props: { product },
+  }));
+}) satisfies GetStaticPaths;
+
+const { product } = Astro.props;
+const { Content } = await product.render();
+const { name, model, description, specs, features, lang } = product.data;
+---
+
+<BaseLayout
+  title={`${name} - ${model} | Kinarray`}
+  description={description}
+  lang={lang}
+>
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <article class="prose prose-lg max-w-none">
+      <h1>{name}</h1>
+      <p class="text-xl text-gray-600">{description}</p>
+
+      {specs && (
+        <div class="bg-gray-50 rounded-lg p-6 my-8">
+          <h2>{lang === 'en' ? 'Technical Specifications' : '技术规格'}</h2>
+          <dl class="grid grid-cols-2 gap-4">
+            {specs.range && (
+              <>
+                <dt class="font-semibold">{lang === 'en' ? 'Range' : '量程'}</dt>
+                <dd>{specs.range}</dd>
+              </>
+            )}
+            {specs.accuracy && (
+              <>
+                <dt class="font-semibold">{lang === 'en' ? 'Accuracy' : '精度'}</dt>
+                <dd>{specs.accuracy}</dd>
+              </>
+            )}
+            {specs.resolution && (
+              <>
+                <dt class="font-semibold">{lang === 'en' ? 'Resolution' : '分辨率'}</dt>
+                <dd>{specs.resolution}</dd>
+              </>
+            )}
+            {specs.fieldOfView && (
+              <>
+                <dt class="font-semibold">{lang === 'en' ? 'Field of View' : '视场角'}</dt>
+                <dd>{specs.fieldOfView}</dd>
+              </>
+            )}
+            {specs.power && (
+              <>
+                <dt class="font-semibold">{lang === 'en' ? 'Power' : '功耗'}</dt>
+                <dd>{specs.power}</dd>
+              </>
+            )}
+            {specs.weight && (
+              <>
+                <dt class="font-semibold">{lang === 'en' ? 'Weight' : '重量'}</dt>
+                <dd>{specs.weight}</dd>
+              </>
+            )}
+          </dl>
+        </div>
+      )}
+
+      {features && features.length > 0 && (
+        <div class="my-8">
+          <h2>{lang === 'en' ? 'Key Features' : '核心特性'}</h2>
+          <ul>
+            {features.map(feature => <li>{feature}</li>)}
+          </ul>
+        </div>
+      )}
+
+      <Content />
+    </article>
+
+    <div class="mt-12 bg-blue-600 text-white rounded-lg p-8 text-center">
+      <h3 class="text-2xl font-bold mb-4">
+        {lang === 'en' ? 'Interested in this product?' : '对此产品感兴趣?'}
+      </h3>
+      <p class="mb-6">
+        {lang === 'en'
+          ? 'Contact us to learn more about pricing and deployment options.'
+          : '联系我们了解更多关于价格和部署选项的信息。'}
+      </p>
+      <a
+        href="mailto:info@kinarray.com"
+        class="inline-block bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
+      >
+        {lang === 'en' ? 'Contact Sales' : '联系销售'}
+      </a>
+    </div>
+  </main>
+</BaseLayout>

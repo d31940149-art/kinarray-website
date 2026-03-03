@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const lang = 'en';
+const products = await getCollection('products', ({ data }) => data.lang === lang);
+---
+
+<BaseLayout
+  title="Products - Kinarray Deformation Monitoring Radar"
+  description="Explore our range of deformation monitoring radar solutions for highway and railway safety."
+  lang={lang}
+>
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-4xl font-bold mb-8">Our Products</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {products.map((product) => (
+        <a href={`/en/products/${product.slug}/`} class="block bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition">
+          <div class="bg-gray-200 h-48 flex items-center justify-center">
+            <span class="text-gray-500">Product Image</span>
+          </div>
+          <div class="p-6">
+            <h2 class="text-2xl font-bold mb-2">{product.data.name}</h2>
+            <p class="text-gray-600 mb-4">{product.data.description}</p>
+            <span class="text-blue-600 font-semibold">Learn More →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </main>
+</BaseLayout>

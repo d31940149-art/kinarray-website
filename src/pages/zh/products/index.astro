@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const lang = 'zh';
+const products = await getCollection('products', ({ data }) => data.lang === lang);
+---
+
+<BaseLayout
+  title="产品 - Kinarray 形变监测雷达"
+  description="探索我们的公路铁路安全形变监测雷达解决方案系列。"
+  lang={lang}
+>
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-4xl font-bold mb-8">我们的产品</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {products.map((product) => (
+        <a href={`/zh/products/${product.slug}/`} class="block bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition">
+          <div class="bg-gray-200 h-48 flex items-center justify-center">
+            <span class="text-gray-500">产品图片</span>
+          </div>
+          <div class="p-6">
+            <h2 class="text-2xl font-bold mb-2">{product.data.name}</h2>
+            <p class="text-gray-600 mb-4">{product.data.description}</p>
+            <span class="text-blue-600 font-semibold">了解更多 →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </main>
+</BaseLayout>

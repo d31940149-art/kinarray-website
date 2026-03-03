@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const lang = 'zh';
+const posts = await getCollection('blog', ({ data }) => data.lang === lang);
+const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout
+  title="博客 - Kinarray 形变监测洞察"
+  description="关于形变监测、雷达技术和基础设施安全的技术文章和见解。"
+  lang={lang}
+>
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-4xl font-bold mb-8">博客</h1>
+
+    <div class="space-y-8">
+      {sortedPosts.map((post) => (
+        <article class="border-b border-gray-200 pb-8">
+          <a href={`/zh/blog/${post.slug}/`} class="block hover:opacity-80 transition">
+            <h2 class="text-2xl font-bold mb-2">{post.data.title}</h2>
+            <div class="text-gray-600 text-sm mb-3">
+              {post.data.pubDate.toLocaleDateString('zh-CN', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
+              {post.data.author && <span> · {post.data.author}</span>}
+            </div>
+            <p class="text-gray-700">{post.data.description}</p>
+            {post.data.tags && post.data.tags.length > 0 && (
+              <div class="flex gap-2 mt-3">
+                {post.data.tags.map(tag => (
+                  <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+          </a>
+        </article>
+      ))}
+    </div>
+  </main>
+</BaseLayout>
