@@ -9,122 +9,422 @@ const lang = 'en';
   description="Remote non-contact deformation monitoring radar with millimeter-level accuracy for highway and railway slope safety. 24/7 real-time early warning system."
   lang={lang}
 >
-  <main>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+    :root {
+      --slate-950: #020617;
+      --slate-900: #0f172a;
+      --slate-800: #1e293b;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-400: #94a3b8;
+      --slate-300: #cbd5e1;
+      --cyan-500: #06b6d4;
+      --cyan-400: #22d3ee;
+      --cyan-600: #0891b2;
+    }
+
+    .hero-grid {
+      background-image:
+        linear-gradient(rgba(6, 182, 212, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(6, 182, 212, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: gridPulse 8s ease-in-out infinite;
+    }
+
+    @keyframes gridPulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.6; }
+    }
+
+    .radar-scan {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .radar-scan::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(6, 182, 212, 0.15) 60deg, transparent 120deg);
+      animation: radarSweep 4s linear infinite;
+      transform-origin: center;
+    }
+
+    @keyframes radarSweep {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.95) 100%);
+      border: 1px solid rgba(6, 182, 212, 0.2);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      border-color: rgba(6, 182, 212, 0.5);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(6, 182, 212, 0.1);
+    }
+
+    .tech-line {
+      position: relative;
+      padding-left: 24px;
+    }
+
+    .tech-line::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--cyan-500) 0%, transparent 100%);
+    }
+
+    .data-stream {
+      font-family: 'IBM Plex Mono', monospace;
+      color: var(--cyan-400);
+      opacity: 0;
+      animation: dataFadeIn 0.6s ease forwards;
+    }
+
+    @keyframes dataFadeIn {
+      to { opacity: 1; }
+    }
+
+    .feature-card {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(148, 163, 184, 0.1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.1), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .feature-card:hover::before {
+      left: 100%;
+    }
+
+    .feature-card:hover {
+      border-color: rgba(6, 182, 212, 0.3);
+      transform: translateX(8px);
+    }
+
+    .diagonal-accent {
+      position: absolute;
+      width: 200px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan-500), transparent);
+      transform: rotate(-45deg);
+      opacity: 0.3;
+    }
+
+    .noise-texture {
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--cyan-600) 0%, var(--cyan-500) 100%);
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      font-size: 0.875rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .btn-primary:hover::before {
+      left: 100%;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(6, 182, 212, 0.3);
+    }
+
+    .btn-secondary {
+      border: 2px solid var(--cyan-500);
+      color: var(--cyan-400);
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      font-size: 0.875rem;
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(6, 182, 212, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .stagger-1 { animation-delay: 0.1s; }
+    .stagger-2 { animation-delay: 0.2s; }
+    .stagger-3 { animation-delay: 0.3s; }
+    .stagger-4 { animation-delay: 0.4s; }
+  </style>
+
+  <main class="bg-slate-950 text-white" style="font-family: 'DM Sans', sans-serif;">
     <!-- Hero Section -->
-    <section class="bg-gradient-to-br from-blue-600 to-blue-800 text-white py-20">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center">
-          <h1 class="text-5xl font-bold mb-6">
-            Protect Your Infrastructure with<br />Advanced Radar Monitoring
-          </h1>
-          <p class="text-xl mb-8 text-blue-100 max-w-3xl mx-auto">
-            Remote, non-contact deformation monitoring for highways and railways.
-            Millimeter-level accuracy. Real-time early warning. 24/7 unattended operation.
-          </p>
-          <div class="flex gap-4 justify-center">
-            <a href="/en/products/" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
-              View Products
-            </a>
-            <a href="/en/blog/" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition">
-              Learn More
-            </a>
+    <section class="relative min-h-screen flex items-center overflow-hidden noise-texture">
+      <div class="hero-grid absolute inset-0"></div>
+      <div class="diagonal-accent top-20 left-1/4"></div>
+      <div class="diagonal-accent bottom-40 right-1/3"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-32">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div>
+            <div class="inline-block mb-6 px-4 py-2 bg-slate-800/50 border border-cyan-500/30 rounded-full">
+              <span class="data-stream text-xs">PRECISION MONITORING SYSTEMS</span>
+            </div>
+            <h1 class="text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+              <span class="block text-slate-300">Infrastructure</span>
+              <span class="block bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent">Safety Redefined</span>
+            </h1>
+            <p class="text-xl text-slate-400 mb-8 leading-relaxed max-w-xl">
+              Millimeter-precision deformation monitoring for critical infrastructure.
+              Real-time threat detection. Zero-contact deployment.
+            </p>
+            <div class="flex flex-wrap gap-4 mb-12">
+              <a href="/en/products/" class="btn-primary px-8 py-4 rounded-sm text-white">
+                Explore Technology
+              </a>
+              <a href="/en/blog/" class="btn-secondary px-8 py-4 rounded-sm">
+                Technical Docs
+              </a>
+            </div>
+            <div class="grid grid-cols-3 gap-6">
+              <div class="stat-card p-4 rounded-sm data-stream stagger-1">
+                <div class="text-3xl font-bold text-cyan-400 mb-1">0.1mm</div>
+                <div class="text-xs text-slate-400 uppercase tracking-wider">Accuracy</div>
+              </div>
+              <div class="stat-card p-4 rounded-sm data-stream stagger-2">
+                <div class="text-3xl font-bold text-cyan-400 mb-1">500m</div>
+                <div class="text-xs text-slate-400 uppercase tracking-wider">Range</div>
+              </div>
+              <div class="stat-card p-4 rounded-sm data-stream stagger-3">
+                <div class="text-3xl font-bold text-cyan-400 mb-1">24/7</div>
+                <div class="text-xs text-slate-400 uppercase tracking-wider">Monitoring</div>
+              </div>
+            </div>
+          </div>
+          <div class="relative">
+            <div class="radar-scan aspect-square rounded-sm bg-slate-900/50 border border-slate-700 flex items-center justify-center">
+              <div class="text-center">
+                <div class="w-64 h-64 rounded-full border-2 border-cyan-500/20 flex items-center justify-center relative">
+                  <div class="w-48 h-48 rounded-full border-2 border-cyan-500/30 flex items-center justify-center">
+                    <div class="w-32 h-32 rounded-full border-2 border-cyan-500/40 flex items-center justify-center">
+                      <div class="w-4 h-4 rounded-full bg-cyan-400 animate-pulse"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-6 text-cyan-400 font-mono text-sm">ACTIVE SCAN</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Features Section -->
-    <section class="py-20">
+    <section class="py-32 bg-slate-900 relative">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-center mb-12">Why Choose Kinarray?</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div class="text-center p-6">
-            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+        <div class="mb-20">
+          <div class="inline-block mb-4 px-4 py-2 bg-slate-800/50 border border-cyan-500/30 rounded-full">
+            <span class="data-stream text-xs text-cyan-400">CORE CAPABILITIES</span>
+          </div>
+          <h2 class="text-5xl font-bold text-white mb-4">Enterprise-Grade Monitoring</h2>
+          <p class="text-xl text-slate-400 max-w-2xl">Engineered for mission-critical infrastructure protection with uncompromising precision.</p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="feature-card p-8 rounded-sm">
+            <div class="w-12 h-12 bg-cyan-500/10 border border-cyan-500/30 rounded-sm flex items-center justify-center mb-6">
+              <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
               </svg>
             </div>
-            <h3 class="text-xl font-semibold mb-2">Remote & Safe</h3>
-            <p class="text-gray-600">No need to access dangerous slopes. Monitor from a safe distance.</p>
+            <h3 class="text-2xl font-bold text-white mb-3">Remote Deployment</h3>
+            <p class="text-slate-400 mb-4 leading-relaxed">Zero-contact monitoring eliminates personnel risk. Deploy from safe distances without compromising data integrity.</p>
+            <div class="tech-line pt-4">
+              <div class="font-mono text-xs text-cyan-400 mb-1">RANGE: 500M</div>
+              <div class="font-mono text-xs text-slate-500">NON-INVASIVE SENSING</div>
+            </div>
           </div>
-          <div class="text-center p-6">
-            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="feature-card p-8 rounded-sm">
+            <div class="w-12 h-12 bg-cyan-500/10 border border-cyan-500/30 rounded-sm flex items-center justify-center mb-6">
+              <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
               </svg>
             </div>
-            <h3 class="text-xl font-semibold mb-2">Real-Time Alerts</h3>
-            <p class="text-gray-600">Instant notifications via phone and WeChat when deformation is detected.</p>
+            <h3 class="text-2xl font-bold text-white mb-3">Real-Time Intelligence</h3>
+            <p class="text-slate-400 mb-4 leading-relaxed">Continuous threat assessment with instant multi-channel alerting. Automated response protocols minimize reaction time.</p>
+            <div class="tech-line pt-4">
+              <div class="font-mono text-xs text-cyan-400 mb-1">LATENCY: &lt;2S</div>
+              <div class="font-mono text-xs text-slate-500">4G/5G CONNECTIVITY</div>
+            </div>
           </div>
-          <div class="text-center p-6">
-            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="feature-card p-8 rounded-sm">
+            <div class="w-12 h-12 bg-cyan-500/10 border border-cyan-500/30 rounded-sm flex items-center justify-center mb-6">
+              <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
               </svg>
             </div>
-            <h3 class="text-xl font-semibold mb-2">Millimeter Accuracy</h3>
-            <p class="text-gray-600">Detect movements as small as 0.1mm with advanced radar technology.</p>
+            <h3 class="text-2xl font-bold text-white mb-3">Precision Sensing</h3>
+            <p class="text-slate-400 mb-4 leading-relaxed">Sub-millimeter deformation detection through advanced interferometric radar technology. Unmatched accuracy.</p>
+            <div class="tech-line pt-4">
+              <div class="font-mono text-xs text-cyan-400 mb-1">RESOLUTION: 0.1MM</div>
+              <div class="font-mono text-xs text-slate-500">INTERFEROMETRIC SAR</div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Product Highlight -->
-    <section class="bg-gray-50 py-20">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div>
-            <h2 class="text-3xl font-bold mb-6">Kinarray S500</h2>
-            <p class="text-lg text-gray-600 mb-6">
-              Highway disaster prevention deformation monitoring radar designed for 24/7 unattended operation in harsh environments.
+    <section class="py-32 bg-slate-950 relative overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-b from-slate-900 via-transparent to-slate-900 opacity-50"></div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div class="order-2 lg:order-1">
+            <div class="inline-block mb-6 px-4 py-2 bg-slate-800/50 border border-cyan-500/30 rounded-full">
+              <span class="data-stream text-xs text-cyan-400">FLAGSHIP SYSTEM</span>
+            </div>
+            <h2 class="text-5xl font-bold text-white mb-4">Kinarray S500</h2>
+            <p class="text-xl text-slate-400 mb-8 leading-relaxed">
+              Military-grade deformation monitoring engineered for extreme environments. Autonomous operation in temperatures from -40°C to +65°C.
             </p>
-            <ul class="space-y-3 mb-8">
-              <li class="flex items-start">
-                <svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                </svg>
-                <span>500m monitoring range with 0.1-1mm accuracy</span>
-              </li>
-              <li class="flex items-start">
-                <svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                </svg>
-                <span>Wide temperature range: -40°C to +65°C</span>
-              </li>
-              <li class="flex items-start">
-                <svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                </svg>
-                <span>Compact and lightweight: only 3kg</span>
-              </li>
-              <li class="flex items-start">
-                <svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                </svg>
-                <span>Solar powered with battery backup</span>
-              </li>
-            </ul>
-            <a href="/en/products/s500-en/" class="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
-              Learn More
+            <div class="space-y-4 mb-10">
+              <div class="flex items-start gap-4 p-4 bg-slate-900/50 border-l-2 border-cyan-500 rounded-sm">
+                <div class="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0"></div>
+                <div>
+                  <div class="font-mono text-sm text-cyan-400 mb-1">500M RANGE / 0.1-1MM PRECISION</div>
+                  <div class="text-slate-400 text-sm">Extended monitoring radius with sub-millimeter accuracy</div>
+                </div>
+              </div>
+              <div class="flex items-start gap-4 p-4 bg-slate-900/50 border-l-2 border-cyan-500 rounded-sm">
+                <div class="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0"></div>
+                <div>
+                  <div class="font-mono text-sm text-cyan-400 mb-1">EXTREME TEMPERATURE RANGE</div>
+                  <div class="text-slate-400 text-sm">Operational from -40°C to +65°C with IP65 protection</div>
+                </div>
+              </div>
+              <div class="flex items-start gap-4 p-4 bg-slate-900/50 border-l-2 border-cyan-500 rounded-sm">
+                <div class="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0"></div>
+                <div>
+                  <div class="font-mono text-sm text-cyan-400 mb-1">COMPACT DEPLOYMENT</div>
+                  <div class="text-slate-400 text-sm">3kg system with solar power and battery backup</div>
+                </div>
+              </div>
+              <div class="flex items-start gap-4 p-4 bg-slate-900/50 border-l-2 border-cyan-500 rounded-sm">
+                <div class="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0"></div>
+                <div>
+                  <div class="font-mono text-sm text-cyan-400 mb-1">AUTONOMOUS OPERATION</div>
+                  <div class="text-slate-400 text-sm">24/7 unattended monitoring with remote OTA updates</div>
+                </div>
+              </div>
+            </div>
+            <a href="/en/products/s500-en/" class="btn-primary inline-block px-8 py-4 rounded-sm text-white">
+              Technical Specifications
             </a>
           </div>
-          <div class="bg-gray-200 rounded-lg h-96 flex items-center justify-center">
-            <span class="text-gray-500">Product Image Placeholder</span>
+          <div class="order-1 lg:order-2">
+            <div class="relative">
+              <div class="aspect-square bg-slate-900 border border-slate-700 rounded-sm p-12 flex items-center justify-center relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent"></div>
+                <div class="relative z-10 text-center">
+                  <div class="text-8xl font-bold text-transparent bg-gradient-to-br from-cyan-400 to-cyan-600 bg-clip-text mb-4">S500</div>
+                  <div class="font-mono text-cyan-400 text-sm mb-8">DEFORMATION MONITORING RADAR</div>
+                  <div class="grid grid-cols-2 gap-4 max-w-xs mx-auto">
+                    <div class="bg-slate-800/50 p-3 rounded-sm border border-slate-700">
+                      <div class="text-2xl font-bold text-cyan-400">288</div>
+                      <div class="text-xs text-slate-500">WIDTH MM</div>
+                    </div>
+                    <div class="bg-slate-800/50 p-3 rounded-sm border border-slate-700">
+                      <div class="text-2xl font-bold text-cyan-400">175</div>
+                      <div class="text-xs text-slate-500">HEIGHT MM</div>
+                    </div>
+                    <div class="bg-slate-800/50 p-3 rounded-sm border border-slate-700">
+                      <div class="text-2xl font-bold text-cyan-400">47</div>
+                      <div class="text-xs text-slate-500">DEPTH MM</div>
+                    </div>
+                    <div class="bg-slate-800/50 p-3 rounded-sm border border-slate-700">
+                      <div class="text-2xl font-bold text-cyan-400">3</div>
+                      <div class="text-xs text-slate-500">WEIGHT KG</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="bg-blue-600 text-white py-16">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl font-bold mb-4">Ready to Protect Your Infrastructure?</h2>
-        <p class="text-xl mb-8 text-blue-100">
-          Contact us today to learn how Kinarray can help secure your highways and railways.
+    <section class="py-32 bg-slate-900 relative overflow-hidden">
+      <div class="absolute inset-0">
+        <div class="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-transparent to-cyan-500/10"></div>
+      </div>
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        <div class="inline-block mb-6 px-4 py-2 bg-slate-800/50 border border-cyan-500/30 rounded-full">
+          <span class="data-stream text-xs text-cyan-400">GET STARTED</span>
+        </div>
+        <h2 class="text-5xl font-bold text-white mb-6">Deploy Enterprise Monitoring</h2>
+        <p class="text-xl text-slate-400 mb-12 max-w-2xl mx-auto leading-relaxed">
+          Connect with our technical team to design a monitoring solution for your critical infrastructure.
         </p>
-        <a href="mailto:info@kinarray.com" class="inline-block bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
-          Get in Touch
-        </a>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <a href="mailto:info@kinarray.com" class="btn-primary px-10 py-5 rounded-sm text-white">
+            Request Consultation
+          </a>
+          <a href="/en/blog/" class="btn-secondary px-10 py-5 rounded-sm">
+            Technical Resources
+          </a>
+        </div>
+        <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
+          <div class="text-center">
+            <div class="text-3xl font-bold text-cyan-400 mb-2">ISO 9001</div>
+            <div class="text-sm text-slate-500 uppercase tracking-wider">Certified Quality</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-bold text-cyan-400 mb-2">24/7</div>
+            <div class="text-sm text-slate-500 uppercase tracking-wider">Technical Support</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-bold text-cyan-400 mb-2">Global</div>
+            <div class="text-sm text-slate-500 uppercase tracking-wider">Deployment</div>
+          </div>
+        </div>
       </div>
     </section>
   </main>

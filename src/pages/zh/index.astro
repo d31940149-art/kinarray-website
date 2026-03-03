@@ -9,121 +9,422 @@ const lang = 'zh';
   description="远程非接触式形变监测雷达,毫米级精度,用于公路铁路边坡安全。7×24小时实时预警系统。"
   lang={lang}
 >
-  <main>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+    :root {
+      --slate-950: #020617;
+      --slate-900: #0f172a;
+      --slate-800: #1e293b;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-400: #94a3b8;
+      --slate-300: #cbd5e1;
+      --cyan-500: #06b6d4;
+      --cyan-400: #22d3ee;
+      --cyan-600: #0891b2;
+    }
+
+    .hero-grid {
+      background-image:
+        linear-gradient(rgba(6, 182, 212, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(6, 182, 212, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: gridPulse 8s ease-in-out infinite;
+    }
+
+    @keyframes gridPulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.6; }
+    }
+
+    .radar-scan {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .radar-scan::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(6, 182, 212, 0.15) 60deg, transparent 120deg);
+      animation: radarSweep 4s linear infinite;
+      transform-origin: center;
+    }
+
+    @keyframes radarSweep {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.95) 100%);
+      border: 1px solid rgba(6, 182, 212, 0.2);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      border-color: rgba(6, 182, 212, 0.5);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(6, 182, 212, 0.1);
+    }
+
+    .tech-line {
+      position: relative;
+      padding-left: 24px;
+    }
+
+    .tech-line::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--cyan-500) 0%, transparent 100%);
+    }
+
+    .data-stream {
+      font-family: 'IBM Plex Mono', monospace;
+      color: var(--cyan-400);
+      opacity: 0;
+      animation: dataFadeIn 0.6s ease forwards;
+    }
+
+    @keyframes dataFadeIn {
+      to { opacity: 1; }
+    }
+
+    .feature-card {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(148, 163, 184, 0.1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.1), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .feature-card:hover::before {
+      left: 100%;
+    }
+
+    .feature-card:hover {
+      border-color: rgba(6, 182, 212, 0.3);
+      transform: translateX(8px);
+    }
+
+    .diagonal-accent {
+      position: absolute;
+      width: 200px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan-500), transparent);
+      transform: rotate(-45deg);
+      opacity: 0.3;
+    }
+
+    .noise-texture {
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--cyan-600) 0%, var(--cyan-500) 100%);
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      font-size: 0.875rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .btn-primary:hover::before {
+      left: 100%;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(6, 182, 212, 0.3);
+    }
+
+    .btn-secondary {
+      border: 2px solid var(--cyan-500);
+      color: var(--cyan-400);
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      font-size: 0.875rem;
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(6, 182, 212, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .stagger-1 { animation-delay: 0.1s; }
+    .stagger-2 { animation-delay: 0.2s; }
+    .stagger-3 { animation-delay: 0.3s; }
+    .stagger-4 { animation-delay: 0.4s; }
+  </style>
+
+  <main class="bg-slate-950 text-white" style="font-family: 'Noto Sans SC', sans-serif;">
     <!-- Hero Section -->
-    <section class="bg-gradient-to-br from-blue-600 to-blue-800 text-white py-20">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center">
-          <h1 class="text-5xl font-bold mb-6">
-            用先进雷达监测技术<br />保护您的基础设施
-          </h1>
-          <p class="text-xl mb-8 text-blue-100 max-w-3xl mx-auto">
-            公路铁路远程非接触式形变监测。毫米级精度。实时预警。7×24小时无人值守。
-          </p>
-          <div class="flex gap-4 justify-center">
-            <a href="/zh/products/" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
-              查看产品
-            </a>
-            <a href="/zh/blog/" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition">
-              了解更多
-            </a>
+    <section class="relative min-h-screen flex items-center overflow-hidden noise-texture">
+      <div class="hero-grid absolute inset-0"></div>
+      <div class="diagonal-accent top-20 left-1/4"></div>
+      <div class="diagonal-accent bottom-40 right-1/3"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-32">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div>
+            <div class="inline-block mb-6 px-4 py-2 bg-slate-800/50 border border-cyan-500/30 rounded-full">
+              <span class="data-stream text-xs">精密监测系统</span>
+            </div>
+            <h1 class="text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+              <span class="block text-slate-300">基础设施</span>
+              <span class="block bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent">安全新标准</span>
+            </h1>
+            <p class="text-xl text-slate-400 mb-8 leading-relaxed max-w-xl">
+              毫米级精度形变监测,守护关键基础设施。
+              实时威胁检测。零接触部署。
+            </p>
+            <div class="flex flex-wrap gap-4 mb-12">
+              <a href="/zh/products/" class="btn-primary px-8 py-4 rounded-sm text-white">
+                探索技术
+              </a>
+              <a href="/zh/blog/" class="btn-secondary px-8 py-4 rounded-sm">
+                技术文档
+              </a>
+            </div>
+            <div class="grid grid-cols-3 gap-6">
+              <div class="stat-card p-4 rounded-sm data-stream stagger-1">
+                <div class="text-3xl font-bold text-cyan-400 mb-1">0.1mm</div>
+                <div class="text-xs text-slate-400 uppercase tracking-wider">精度</div>
+              </div>
+              <div class="stat-card p-4 rounded-sm data-stream stagger-2">
+                <div class="text-3xl font-bold text-cyan-400 mb-1">500m</div>
+                <div class="text-xs text-slate-400 uppercase tracking-wider">量程</div>
+              </div>
+              <div class="stat-card p-4 rounded-sm data-stream stagger-3">
+                <div class="text-3xl font-bold text-cyan-400 mb-1">24/7</div>
+                <div class="text-xs text-slate-400 uppercase tracking-wider">监测</div>
+              </div>
+            </div>
+          </div>
+          <div class="relative">
+            <div class="radar-scan aspect-square rounded-sm bg-slate-900/50 border border-slate-700 flex items-center justify-center">
+              <div class="text-center">
+                <div class="w-64 h-64 rounded-full border-2 border-cyan-500/20 flex items-center justify-center relative">
+                  <div class="w-48 h-48 rounded-full border-2 border-cyan-500/30 flex items-center justify-center">
+                    <div class="w-32 h-32 rounded-full border-2 border-cyan-500/40 flex items-center justify-center">
+                      <div class="w-4 h-4 rounded-full bg-cyan-400 animate-pulse"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-6 text-cyan-400 font-mono text-sm">主动扫描</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Features Section -->
-    <section class="py-20">
+    <section class="py-32 bg-slate-900 relative">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-center mb-12">为什么选择 Kinarray?</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div class="text-center p-6">
-            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+        <div class="mb-20">
+          <div class="inline-block mb-4 px-4 py-2 bg-slate-800/50 border border-cyan-500/30 rounded-full">
+            <span class="data-stream text-xs text-cyan-400">核心能力</span>
+          </div>
+          <h2 class="text-5xl font-bold text-white mb-4">企业级监测方案</h2>
+          <p class="text-xl text-slate-400 max-w-2xl">为关键基础设施保护而设计,精度毫不妥协。</p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="feature-card p-8 rounded-sm">
+            <div class="w-12 h-12 bg-cyan-500/10 border border-cyan-500/30 rounded-sm flex items-center justify-center mb-6">
+              <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
               </svg>
             </div>
-            <h3 class="text-xl font-semibold mb-2">远程安全</h3>
-            <p class="text-gray-600">无需进入危险边坡。从安全距离进行监测。</p>
+            <h3 class="text-2xl font-bold text-white mb-3">远程部署</h3>
+            <p class="text-slate-400 mb-4 leading-relaxed">零接触监测消除人员风险。从安全距离部署,不影响数据完整性。</p>
+            <div class="tech-line pt-4">
+              <div class="font-mono text-xs text-cyan-400 mb-1">量程: 500M</div>
+              <div class="font-mono text-xs text-slate-500">非侵入式传感</div>
+            </div>
           </div>
-          <div class="text-center p-6">
-            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="feature-card p-8 rounded-sm">
+            <div class="w-12 h-12 bg-cyan-500/10 border border-cyan-500/30 rounded-sm flex items-center justify-center mb-6">
+              <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
               </svg>
             </div>
-            <h3 class="text-xl font-semibold mb-2">实时报警</h3>
-            <p class="text-gray-600">检测到形变时通过电话和微信即时通知。</p>
+            <h3 class="text-2xl font-bold text-white mb-3">实时智能</h3>
+            <p class="text-slate-400 mb-4 leading-relaxed">持续威胁评估,多通道即时报警。自动响应协议最小化反应时间。</p>
+            <div class="tech-line pt-4">
+              <div class="font-mono text-xs text-cyan-400 mb-1">延迟: &lt;2S</div>
+              <div class="font-mono text-xs text-slate-500">4G/5G 连接</div>
+            </div>
           </div>
-          <div class="text-center p-6">
-            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="feature-card p-8 rounded-sm">
+            <div class="w-12 h-12 bg-cyan-500/10 border border-cyan-500/30 rounded-sm flex items-center justify-center mb-6">
+              <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
               </svg>
             </div>
-            <h3 class="text-xl font-semibold mb-2">毫米级精度</h3>
-            <p class="text-gray-600">利用先进雷达技术检测小至0.1毫米的移动。</p>
+            <h3 class="text-2xl font-bold text-white mb-3">精密传感</h3>
+            <p class="text-slate-400 mb-4 leading-relaxed">通过先进干涉雷达技术实现亚毫米形变检测。无与伦比的精度。</p>
+            <div class="tech-line pt-4">
+              <div class="font-mono text-xs text-cyan-400 mb-1">分辨率: 0.1MM</div>
+              <div class="font-mono text-xs text-slate-500">干涉 SAR</div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Product Highlight -->
-    <section class="bg-gray-50 py-20">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div>
-            <h2 class="text-3xl font-bold mb-6">Kinarray S500</h2>
-            <p class="text-lg text-gray-600 mb-6">
-              公路地灾专用形变监测雷达,专为恶劣环境下7×24小时无人值守运行而设计。
+    <section class="py-32 bg-slate-950 relative overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-b from-slate-900 via-transparent to-slate-900 opacity-50"></div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div class="order-2 lg:order-1">
+            <div class="inline-block mb-6 px-4 py-2 bg-slate-800/50 border border-cyan-500/30 rounded-full">
+              <span class="data-stream text-xs text-cyan-400">旗舰系统</span>
+            </div>
+            <h2 class="text-5xl font-bold text-white mb-4">Kinarray S500</h2>
+            <p class="text-xl text-slate-400 mb-8 leading-relaxed">
+              军工级形变监测,专为极端环境设计。-40°C 至 +65°C 自主运行。
             </p>
-            <ul class="space-y-3 mb-8">
-              <li class="flex items-start">
-                <svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                </svg>
-                <span>500米监测距离,0.1-1毫米精度</span>
-              </li>
-              <li class="flex items-start">
-                <svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                </svg>
-                <span>宽温度范围:-40°C至+65°C</span>
-              </li>
-              <li class="flex items-start">
-                <svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                </svg>
-                <span>紧凑轻便:仅3公斤</span>
-              </li>
-              <li class="flex items-start">
-                <svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                </svg>
-                <span>太阳能供电,电池备份</span>
-              </li>
-            </ul>
-            <a href="/zh/products/s500-zh/" class="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
-              了解更多
+            <div class="space-y-4 mb-10">
+              <div class="flex items-start gap-4 p-4 bg-slate-900/50 border-l-2 border-cyan-500 rounded-sm">
+                <div class="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0"></div>
+                <div>
+                  <div class="font-mono text-sm text-cyan-400 mb-1">500M 量程 / 0.1-1MM 精度</div>
+                  <div class="text-slate-400 text-sm">扩展监测半径,亚毫米级精度</div>
+                </div>
+              </div>
+              <div class="flex items-start gap-4 p-4 bg-slate-900/50 border-l-2 border-cyan-500 rounded-sm">
+                <div class="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0"></div>
+                <div>
+                  <div class="font-mono text-sm text-cyan-400 mb-1">极端温度范围</div>
+                  <div class="text-slate-400 text-sm">-40°C 至 +65°C 运行,IP65 防护</div>
+                </div>
+              </div>
+              <div class="flex items-start gap-4 p-4 bg-slate-900/50 border-l-2 border-cyan-500 rounded-sm">
+                <div class="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0"></div>
+                <div>
+                  <div class="font-mono text-sm text-cyan-400 mb-1">紧凑部署</div>
+                  <div class="text-slate-400 text-sm">3kg 系统,太阳能供电和电池备份</div>
+                </div>
+              </div>
+              <div class="flex items-start gap-4 p-4 bg-slate-900/50 border-l-2 border-cyan-500 rounded-sm">
+                <div class="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0"></div>
+                <div>
+                  <div class="font-mono text-sm text-cyan-400 mb-1">自主运行</div>
+                  <div class="text-slate-400 text-sm">24/7 无人值守监测,远程 OTA 更新</div>
+                </div>
+              </div>
+            </div>
+            <a href="/zh/products/s500-zh/" class="btn-primary inline-block px-8 py-4 rounded-sm text-white">
+              技术规格
             </a>
           </div>
-          <div class="bg-gray-200 rounded-lg h-96 flex items-center justify-center">
-            <span class="text-gray-500">产品图片占位</span>
+          <div class="order-1 lg:order-2">
+            <div class="relative">
+              <div class="aspect-square bg-slate-900 border border-slate-700 rounded-sm p-12 flex items-center justify-center relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent"></div>
+                <div class="relative z-10 text-center">
+                  <div class="text-8xl font-bold text-transparent bg-gradient-to-br from-cyan-400 to-cyan-600 bg-clip-text mb-4">S500</div>
+                  <div class="font-mono text-cyan-400 text-sm mb-8">形变监测雷达</div>
+                  <div class="grid grid-cols-2 gap-4 max-w-xs mx-auto">
+                    <div class="bg-slate-800/50 p-3 rounded-sm border border-slate-700">
+                      <div class="text-2xl font-bold text-cyan-400">288</div>
+                      <div class="text-xs text-slate-500">宽度 MM</div>
+                    </div>
+                    <div class="bg-slate-800/50 p-3 rounded-sm border border-slate-700">
+                      <div class="text-2xl font-bold text-cyan-400">175</div>
+                      <div class="text-xs text-slate-500">高度 MM</div>
+                    </div>
+                    <div class="bg-slate-800/50 p-3 rounded-sm border border-slate-700">
+                      <div class="text-2xl font-bold text-cyan-400">47</div>
+                      <div class="text-xs text-slate-500">深度 MM</div>
+                    </div>
+                    <div class="bg-slate-800/50 p-3 rounded-sm border border-slate-700">
+                      <div class="text-2xl font-bold text-cyan-400">3</div>
+                      <div class="text-xs text-slate-500">重量 KG</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="bg-blue-600 text-white py-16">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl font-bold mb-4">准备好保护您的基础设施了吗?</h2>
-        <p class="text-xl mb-8 text-blue-100">
-          立即联系我们,了解 Kinarray 如何帮助保护您的公路和铁路。
+    <section class="py-32 bg-slate-900 relative overflow-hidden">
+      <div class="absolute inset-0">
+        <div class="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-transparent to-cyan-500/10"></div>
+      </div>
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        <div class="inline-block mb-6 px-4 py-2 bg-slate-800/50 border border-cyan-500/30 rounded-full">
+          <span class="data-stream text-xs text-cyan-400">立即开始</span>
+        </div>
+        <h2 class="text-5xl font-bold text-white mb-6">部署企业级监测</h2>
+        <p class="text-xl text-slate-400 mb-12 max-w-2xl mx-auto leading-relaxed">
+          联系我们的技术团队,为您的关键基础设施设计监测解决方案。
         </p>
-        <a href="mailto:info@kinarray.com" class="inline-block bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
-          联系我们
-        </a>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <a href="mailto:info@kinarray.com" class="btn-primary px-10 py-5 rounded-sm text-white">
+            申请咨询
+          </a>
+          <a href="/zh/blog/" class="btn-secondary px-10 py-5 rounded-sm">
+            技术资源
+          </a>
+        </div>
+        <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
+          <div class="text-center">
+            <div class="text-3xl font-bold text-cyan-400 mb-2">ISO 9001</div>
+            <div class="text-sm text-slate-500 uppercase tracking-wider">质量认证</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-bold text-cyan-400 mb-2">24/7</div>
+            <div class="text-sm text-slate-500 uppercase tracking-wider">技术支持</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-bold text-cyan-400 mb-2">全球</div>
+            <div class="text-sm text-slate-500 uppercase tracking-wider">部署</div>
+          </div>
+        </div>
       </div>
     </section>
   </main>
