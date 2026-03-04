@@ -19,6 +19,20 @@ Object.keys(groupedTerms).forEach(letter => {
 });
 
 const sortedLetters = Object.keys(groupedTerms).sort();
+
+// Pre-render terms to avoid async in template
+const renderedTerms = await Promise.all(
+  sortedLetters.map(async (letter) => {
+    const terms = groupedTerms[letter];
+    const rendered = await Promise.all(
+      terms.map(async (term) => {
+        const { Content } = await term.render();
+        return { term, Content };
+      })
+    );
+    return { letter, terms: rendered };
+  })
+);
 ---
 
 <BaseLayout
@@ -45,7 +59,7 @@ const sortedLetters = Object.keys(groupedTerms).sort();
     </div>
 
     <!-- Terms by Letter -->
-    {sortedLetters.map(letter => (
+    {renderedTerms.map(({ letter, terms }) => (
       <section id={letter} class="mb-16">
         <div class="flex items-center gap-4 mb-8">
           <h2 class="text-4xl font-bold text-slate-200">{letter}</h2>
@@ -53,9 +67,7 @@ const sortedLetters = Object.keys(groupedTerms).sort();
         </div>
         
         <div class="space-y-12">
-          {await Promise.all(groupedTerms[letter].map(async (term) => {
-            const { Content } = await term.render();
-            return (
+          {terms.map(({ term, Content }) => (
               <article class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition-shadow duration-300">
                 <div class="p-8">
                   <div class="flex items-start justify-between mb-4">
@@ -89,8 +101,7 @@ const sortedLetters = Object.keys(groupedTerms).sort();
                   )}
                 </div>
               </article>
-            );
-          }))}
+          ))}
         </div>
       </section>
     ))}

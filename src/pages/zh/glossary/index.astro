@@ -19,6 +19,20 @@ Object.keys(groupedTerms).forEach(char => {
 });
 
 const sortedChars = Object.keys(groupedTerms).sort((a, b) => a.localeCompare(b, 'zh-CN'));
+
+// Pre-render terms to avoid async in template
+const renderedTerms = await Promise.all(
+  sortedChars.map(async (char) => {
+    const terms = groupedTerms[char];
+    const rendered = await Promise.all(
+      terms.map(async (term) => {
+        const { Content } = await term.render();
+        return { term, Content };
+      })
+    );
+    return { char, terms: rendered };
+  })
+);
 ---
 
 <BaseLayout
@@ -34,9 +48,8 @@ const sortedChars = Object.keys(groupedTerms).sort((a, b) => a.localeCompare(b, 
 
     <!-- All Terms List -->
     <div class="space-y-12">
-      {await Promise.all(terms.sort((a, b) => a.data.term.localeCompare(b.data.term, 'zh-CN')).map(async (term) => {
-        const { Content } = await term.render();
-        return (
+      {renderedTerms.map(({ terms }) => 
+        terms.map(({ term, Content }) => (
           <article class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition-shadow duration-300">
             <div class="p-8">
               <div class="flex items-start justify-between mb-4">
@@ -70,8 +83,8 @@ const sortedChars = Object.keys(groupedTerms).sort((a, b) => a.localeCompare(b, 
               )}
             </div>
           </article>
-        );
-      }))}
+        ))
+      )}
     </div>
   </main>
 </BaseLayout>
