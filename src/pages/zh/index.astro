@@ -323,6 +323,102 @@ const lang = 'zh';
       
     </section>
 
+    <!-- Existing Solutions Comparison -->
+    <section class="py-24 bg-white relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-16">
+          <h2 class="text-4xl font-extrabold text-slate-900 mb-4">地表形变监测现状</h2>
+          <div class="flex items-center gap-2 text-slate-500 font-medium">
+            <div class="w-2 h-2 rounded-full bg-slate-400"></div>
+            现有解决方案
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 lg:gap-16">
+          <!-- GNSS Block -->
+          <div class="bg-slate-50 rounded-3xl p-8 border border-slate-200 hover:shadow-xl transition-shadow duration-300">
+            <!-- Placeholder for GNSS Image -->
+            <div class="aspect-video bg-slate-200 rounded-2xl mb-8 overflow-hidden relative group">
+               <div class="absolute inset-0 flex items-center justify-center text-slate-400 font-medium bg-slate-100">
+                 GNSS 监测站示意图
+               </div>
+               <!-- Tip for user to replace image -->
+               <div class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-white text-sm text-center p-4">
+                 请替换为 GNSS 监测站图片<br/>(public/images/gnss-demo.jpg)
+               </div>
+            </div>
+            
+            <h3 class="text-2xl font-bold text-slate-800 text-center mb-8">GNSS监测站</h3>
+            
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3">
+                <div class="flex-shrink-0 flex gap-0.5 mt-1">
+                  <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                  <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                  <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </div>
+                <span class="text-slate-600 font-medium">点监测，只能反映监测点位移</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-green-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                <span class="text-slate-600 font-medium">单点价格在数千元，多点布置成本尚可</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="flex-shrink-0 flex gap-0.5 mt-1">
+                   <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                   <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <span class="text-slate-600 font-medium">无任何运动部件，维护费用低</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-red-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                <span class="text-slate-600 font-medium">需在边坡施工，施工较为危险或不可行</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- SAR Radar Block -->
+          <div class="bg-slate-50 rounded-3xl p-8 border border-slate-200 hover:shadow-xl transition-shadow duration-300">
+            <!-- Placeholder for SAR Image -->
+            <div class="aspect-video bg-slate-200 rounded-2xl mb-8 overflow-hidden relative group">
+               <div class="absolute inset-0 flex items-center justify-center text-slate-400 font-medium bg-slate-100">
+                 合成孔径雷达示意图
+               </div>
+               <!-- Tip for user to replace image -->
+               <div class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-white text-sm text-center p-4">
+                 请替换为合成孔径雷达图片<br/>(public/images/sar-demo.jpg)
+               </div>
+            </div>
+
+            <h3 class="text-2xl font-bold text-slate-800 text-center mb-8">合成孔径边坡雷达</h3>
+            
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-green-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                <span class="text-slate-600 font-medium">面监测，可覆盖整个边坡表面</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="flex-shrink-0 flex gap-0.5 mt-1">
+                  <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                  <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                  <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </div>
+                <span class="text-slate-600 font-medium">设备价格昂贵，难以大规模推广应用</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-red-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                <span class="text-slate-600 font-medium">雷达需沿导轨或转轴反复运动，维护频次较高</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-green-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                <span class="text-slate-600 font-medium">远距离架设，无需在危险边坡施工</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Tech Specs Section -->
     <section class="py-24 bg-slate-900 text-white relative overflow-hidden">
       <!-- Decorator -->
