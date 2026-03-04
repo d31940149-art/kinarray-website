@@ -259,16 +259,12 @@ const lang = 'zh';
         </div>
       </div>
 
-      <!-- Curve Separator -->
-      <div class="absolute bottom-0 left-0 right-0 text-white translate-y-1">
-        <svg viewBox="0 0 1440 120" fill="currentColor" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="w-full h-16 sm:h-24 md:h-32">
-          <path d="M0 120L1440 120L1440 60C1440 60 1082.5 120 720 120C357.5 120 0 60 0 60L0 120Z" />
-        </svg>
-      </div>
+      <!-- Gradient Separator -->
+      <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-slate-50 pointer-events-none"></div>
     </section>
 
     <!-- Hazard Context Section -->
-    <section class="pb-24 pt-12 bg-white relative overflow-hidden">
+    <section class="pb-24 pt-12 bg-slate-50 relative overflow-hidden">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <div class="order-2 lg:order-1 relative">
@@ -298,16 +294,29 @@ const lang = 'zh';
               <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-red-500">无法承受的痛</span>
             </h2>
             <p class="text-lg text-slate-600 mb-8 leading-relaxed">
-              公路沿线地质环境复杂，滑坡、崩塌等地质灾害突发性强。传统的“人防”模式难以做到全天候监控，一旦发生灾害，往往造成交通瘫痪、巨额抢修成本，甚至危及过往车辆和人员安全。
+              重要基础设施沿线及自然边坡地质环境复杂，滑坡、崩塌等地质灾害突发性强。传统的“人防”模式难以做到全天候监控，一旦发生灾害，往往造成交通瘫痪、巨额抢修成本，甚至危及过往车辆和人员安全。
             </p>
-            <div class="grid grid-cols-2 gap-6">
-              <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100">
-                <div class="text-4xl font-extrabold text-slate-900 mb-1">40<span class="text-xl text-slate-500">%</span></div>
-                <div class="text-sm text-slate-500 font-medium">突发性地质灾害占比</div>
+            
+            <!-- Key Challenges List -->
+            <div class="space-y-4">
+              <div class="flex items-start gap-4 p-4 bg-white rounded-xl border border-slate-200 shadow-sm">
+                <div class="mt-1 w-8 h-8 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0 text-red-600">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <div>
+                  <h4 class="font-bold text-slate-900">突发性与不可预测性</h4>
+                  <p class="text-sm text-slate-500 mt-1">灾害常发生在夜间或极端恶劣天气下，人工巡查难以发现隐患。</p>
+                </div>
               </div>
-              <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100">
-                <div class="text-4xl font-extrabold text-orange-500 mb-1">$$$</div>
-                <div class="text-sm text-slate-500 font-medium">巨大的应急抢险成本</div>
+              
+              <div class="flex items-start gap-4 p-4 bg-white rounded-xl border border-slate-200 shadow-sm">
+                <div class="mt-1 w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0 text-orange-600">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                </div>
+                <div>
+                  <h4 class="font-bold text-slate-900">巨大的经济与社会影响</h4>
+                  <p class="text-sm text-slate-500 mt-1">道路中断和应急抢险带来巨额经济损失，严重影响交通命脉畅通。</p>
+                </div>
               </div>
             </div>
           </div>
