@@ -5,8 +5,8 @@ const lang = 'zh';
 ---
 
 <BaseLayout
-  title="Kinarray S500 - 公路地灾专用形变监测雷达"
-  description="Kinarray S500 首创数字成像实孔径干涉雷达，专为公路边坡监测设计。亚毫米级精度，7x24小时全天候预警，守护交通生命线。"
+  title="Kinarray S500 - 关键边坡安全形变监测雷达"
+  description="Kinarray S500 首创数字成像实孔径干涉雷达，专为重点边坡监测设计。亚毫米级精度，7x24小时全天候预警，守护交通生命线。"
   lang={lang}
 >
   <style>
@@ -43,7 +43,7 @@ const lang = 'zh';
 
   <main class="bg-slate-50">
     <!-- Hero Section -->
-    <section class="relative min-h-screen flex flex-col justify-center hero-gradient overflow-hidden pb-10">
+    <section class="relative min-h-screen flex flex-col justify-center hero-gradient overflow-hidden pb-32">
       <!-- Background Effects -->
       <div class="absolute inset-0 bg-[linear-gradient(to_right,#334155_1px,transparent_1px),linear-gradient(to_bottom,#334155_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-10"></div>
       
@@ -57,7 +57,7 @@ const lang = 'zh';
           <div class="text-left">
             <h2 class="text-blue-400 font-bold text-xl mb-2 tracking-wide uppercase">首创数字成像实孔径干涉雷达</h2>
             <h1 class="text-5xl md:text-6xl font-extrabold text-white tracking-tight mb-6 leading-[1.1]">
-              边坡地灾专用：<br/>
+              关键边坡安全专用：<br/>
               <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-100 to-blue-400">S500形变监测雷达</span>
             </h1>
             
@@ -66,7 +66,7 @@ const lang = 'zh';
                 专为 7×24 小时长期监测设计
               </p>
               <p class="text-lg text-slate-300 font-medium">
-                将公路安全监测技术提升至全新水准！
+                将边坡安全监测技术提升至全新水准！
               </p>
             </div>
 
@@ -258,10 +258,17 @@ const lang = 'zh';
            </div>
         </div>
       </div>
+
+      <!-- Curve Separator -->
+      <div class="absolute bottom-0 left-0 right-0 text-white translate-y-1">
+        <svg viewBox="0 0 1440 120" fill="currentColor" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="w-full h-16 sm:h-24 md:h-32">
+          <path d="M0 120L1440 120L1440 60C1440 60 1082.5 120 720 120C357.5 120 0 60 0 60L0 120Z" />
+        </svg>
+      </div>
     </section>
 
     <!-- Hazard Context Section -->
-    <section class="py-24 bg-white relative overflow-hidden">
+    <section class="pb-24 pt-12 bg-white relative overflow-hidden">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <div class="order-2 lg:order-1 relative">
