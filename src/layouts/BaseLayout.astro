@@ -35,9 +35,9 @@ const props = Astro.props;
 <body class="min-h-screen bg-slate-50 text-slate-900 font-sans">
   <nav class="fixed w-full z-50 top-0 start-0 border-b border-white/10 bg-slate-900/90 backdrop-blur-md transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between h-20 items-center">
-        <a href={`/${props.lang}/`} class="text-2xl font-extrabold tracking-tight text-white flex items-center gap-3">
-          <img src="/logo.png" alt="Kinarray Logo" class="h-8 w-auto" />
+      <div class="flex justify-between h-24 items-center">
+        <a href={`/${props.lang}/`} class="text-4xl font-extrabold tracking-tight text-white flex items-center gap-4">
+          <img src="/logo.png" alt="Kinarray Logo" class="h-11 w-auto" />
           Kinarray
         </a>
         <div class="hidden md:flex gap-8 items-center font-medium">
@@ -54,7 +54,7 @@ const props = Astro.props;
     </div>
   </nav>
 
-  <div class="pt-20">
+  <div class="pt-24">
     <slot />
   </div>
 

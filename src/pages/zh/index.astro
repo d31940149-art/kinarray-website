@@ -41,7 +41,7 @@ const lang = 'zh';
     }
   </style>
 
-  <main class="bg-slate-50">
+  <main class="bg-slate-300">
     <!-- Hero Section -->
     <section class="relative min-h-screen flex flex-col justify-center hero-gradient overflow-hidden pb-32">
       <!-- Background Effects -->
@@ -172,7 +172,7 @@ const lang = 'zh';
                        <path d="M10 9L12 9L14 9" stroke="#f97316" stroke-width="2"/>
                        <path d="M10 15L12 15L14 15" stroke="#f97316" stroke-width="2"/>
                     </svg>
-                    <span class="absolute -top-3 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg border border-blue-400">&lt;1mm</span>
+                    <span class="absolute top-2 right-2 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full shadow-[0_4px_10px_rgba(37,99,235,0.3)] border border-blue-400 z-10 whitespace-nowrap">&lt;1mm</span>
                  </div>
                  <h3 class="text-white font-bold text-lg mb-2">亚毫米精度</h3>
                  <ul class="text-slate-400 text-sm space-y-1">
@@ -204,10 +204,11 @@ const lang = 'zh';
               <div class="flex flex-col items-center text-center group">
                  <div class="w-32 h-32 mb-6 relative p-6 rounded-3xl bg-blue-500/10 border border-blue-500/20 group-hover:border-blue-500/50 transition-colors">
                     <svg class="w-full h-full text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                       <path d="M14.7 6.3L17.7 3.3C18.1 2.9 18.7 2.9 19.1 3.3L20.7 4.9C21.1 5.3 21.1 5.9 20.7 6.3L17.7 9.3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
-                       <path d="M3 21L9 15" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
-                       <path d="M12.5 11.5L15.5 14.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
-                       <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-opacity="0.3" stroke-dasharray="4 4"/>
+                       <path d="M14.2 6.2L16.8 3.6C17.2 3.2 17.8 3.2 18.2 3.6L20.4 5.8C20.8 6.2 20.8 6.8 20.4 7.2L17.8 9.8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                       <path d="M9.2 11.8L3.8 17.2C3.4 17.6 3.4 18.2 3.8 18.6L5.4 20.2C5.8 20.6 6.4 20.6 6.8 20.2L12.2 14.8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                       <path d="M10.8 9.2L14.8 13.2" stroke="currentColor" stroke-linecap="round"/>
+                       <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-opacity="0.35"/>
+                       <path d="M6 18L18 6" stroke="#f97316" stroke-width="2.2" stroke-linecap="round"/>
                     </svg>
                  </div>
                  <h3 class="text-white font-bold text-lg mb-2">免维护</h3>
@@ -222,11 +223,10 @@ const lang = 'zh';
               <div class="flex flex-col items-center text-center group">
                  <div class="w-32 h-32 mb-6 relative p-6 rounded-3xl bg-blue-500/10 border border-blue-500/20 group-hover:border-blue-500/50 transition-colors">
                     <svg class="w-full h-full text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                       <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-opacity="0.3"/>
-                       <path d="M12 18V12L14 8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
-                       <path d="M12 12L10 16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
-                       <path d="M12 6V4" stroke="#f97316" stroke-width="2" stroke-linecap="round"/>
-                       <path d="M12 12C12 12 8 10 8 7C8 5 9.5 3.5 11.5 3.5C13.5 3.5 15 5 15 7" fill="currentColor" fill-opacity="0.2" stroke="none"/>
+                        <rect x="3" y="7" width="16" height="10" rx="2" stroke="currentColor"/>
+                        <path d="M19 10H21V14H19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                        <rect x="5.5" y="9.5" width="3" height="5" rx="0.8" fill="#f97316" stroke="none"/>
+                        <path d="M10.5 12H16.5" stroke="currentColor" stroke-opacity="0.35" stroke-linecap="round"/>
                     </svg>
                  </div>
                  <h3 class="text-white font-bold text-lg mb-2">超低功耗</h3>
@@ -259,29 +259,27 @@ const lang = 'zh';
         </div>
       </div>
 
-      <!-- Gradient Separator -->
-      <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-slate-50 pointer-events-none"></div>
     </section>
 
     <!-- Hazard Context Section -->
-    <section class="pb-24 pt-12 bg-slate-50 relative overflow-hidden">
+    <section class="pb-24 pt-12 bg-slate-300 relative overflow-hidden">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <div class="order-2 lg:order-1 relative">
-             <div class="aspect-[4/3] rounded-3xl bg-slate-100 overflow-hidden relative shadow-2xl transform rotate-1 border-4 border-white">
-                <img src="/hazard-context.png" alt="公路边坡灾害示意图" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
-                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-900/90 via-slate-900/50 to-transparent p-8 pt-20">
-                  <div class="flex items-center gap-3">
-                    <div class="w-2 h-10 bg-orange-500 rounded-full"></div>
-                    <div>
-                      <div class="text-white font-bold text-xl">不可预测的风险</div>
-                      <div class="text-slate-300 text-sm">需要 24/7 的技术防线</div>
-                    </div>
-                  </div>
-                </div>
+             <div class="aspect-[16/9] rounded-3xl bg-slate-200 overflow-hidden relative shadow-2xl border-2 border-slate-300 flex items-end justify-center">
+                <img src="/hazard-context.png" alt="隐患边坡场景原图" class="w-full h-full object-cover" />
+             </div>
+             <div class="mt-4 bg-slate-900/80 backdrop-blur-sm rounded-xl p-4 border border-slate-600 shadow-lg max-w-md">
+               <div class="flex items-center gap-3">
+                 <div class="w-1.5 h-12 bg-orange-500 rounded-full"></div>
+                 <div>
+                   <div class="text-white font-bold text-xl leading-tight mb-1">隐患边坡 7*24小时<br/>监测预警</div>
+                   <div class="text-slate-300 text-xs">实时捕捉微小形变，防患于未然</div>
+                 </div>
+               </div>
              </div>
              <!-- Decorative blob -->
-             <div class="absolute -z-10 -bottom-10 -left-10 w-full h-full bg-slate-100 rounded-3xl -rotate-2"></div>
+             <div class="absolute -z-10 -bottom-10 -left-10 w-full h-full bg-slate-400 rounded-3xl"></div>
           </div>
 
           <div class="order-1 lg:order-2">
@@ -299,7 +297,7 @@ const lang = 'zh';
             
             <!-- Key Challenges List -->
             <div class="space-y-4">
-              <div class="flex items-start gap-4 p-4 bg-white rounded-xl border border-slate-200 shadow-sm">
+              <div class="flex items-start gap-4 p-4 bg-slate-200 rounded-xl border border-slate-400 shadow-sm">
                 <div class="mt-1 w-8 h-8 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0 text-red-600">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 </div>
@@ -309,7 +307,7 @@ const lang = 'zh';
                 </div>
               </div>
               
-              <div class="flex items-start gap-4 p-4 bg-white rounded-xl border border-slate-200 shadow-sm">
+              <div class="flex items-start gap-4 p-4 bg-slate-200 rounded-xl border border-slate-400 shadow-sm">
                 <div class="mt-1 w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0 text-orange-600">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
                 </div>
@@ -322,6 +320,7 @@ const lang = 'zh';
           </div>
         </div>
       </div>
+      
     </section>
 
     <!-- Tech Specs Section -->
@@ -348,10 +347,10 @@ const lang = 'zh';
               </div>
               <div class="p-6 rounded-2xl bg-slate-800/50 border border-slate-700 backdrop-blur-sm">
                 <div class="text-sm text-slate-400 mb-2">系统重量</div>
-                <div class="text-2xl font-mono font-bold text-white">&lt; 5 KG</div>
+                <div class="text-2xl font-mono font-bold text-white">3 KG</div>
               </div>
               <div class="p-6 rounded-2xl bg-slate-800/50 border border-slate-700 backdrop-blur-sm">
-                <div class="text-sm text-slate-400 mb-2">功耗</div>
+                <div class="text-sm text-slate-400 mb-2">峰值功耗</div>
                 <div class="text-2xl font-mono font-bold text-white">&lt; 15 W</div>
               </div>
             </div>
@@ -364,7 +363,7 @@ const lang = 'zh';
                <div class="space-y-6">
                  <div class="flex items-center justify-between border-b border-slate-700 pb-4">
                    <span class="text-slate-400">测量原理</span>
-                   <span class="font-bold text-blue-400">地基干涉合成孔径雷达</span>
+                   <span class="font-bold text-blue-400">地基干涉数字实孔径雷达</span>
                  </div>
                  <div class="flex items-center justify-between border-b border-slate-700 pb-4">
                    <span class="text-slate-400">数据更新率</span>
@@ -372,7 +371,7 @@ const lang = 'zh';
                  </div>
                  <div class="flex items-center justify-between border-b border-slate-700 pb-4">
                    <span class="text-slate-400">通讯方式</span>
-                   <span class="font-bold text-white">4G / 5G / 光纤</span>
+                   <span class="font-bold text-white">4G / 5G / 网线直连</span>
                  </div>
                  <div class="flex items-center justify-between">
                    <span class="text-slate-400">供电方式</span>
@@ -390,10 +389,11 @@ const lang = 'zh';
           </div>
         </div>
       </div>
+      
     </section>
 
     <!-- Call to Action -->
-    <section class="py-24 bg-white" id="contact">
+    <section class="py-24 bg-slate-300" id="contact">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 class="text-4xl font-extrabold text-slate-900 mb-6">准备好提升基础设施安全等级了吗？</h2>
         <p class="text-xl text-slate-500 mb-10">
