@@ -13,7 +13,25 @@ export const getStaticPaths = (async () => {
 
 const { product } = Astro.props;
 const { Content } = await product.render();
-const { name, model, description, specs, features, lang } = product.data;
+const { name, model, description, specs, features, lang, image } = product.data;
+
+// Translation helpers
+const t = {
+  specs: lang === 'en' ? 'Technical Specifications' : '技术规格',
+  features: lang === 'en' ? 'Key Features' : '核心特性',
+  contact: lang === 'en' ? 'Contact Sales' : '联系销售',
+  interested: lang === 'en' ? 'Ready to Deploy?' : '准备部署?',
+  interestedDesc: lang === 'en' 
+    ? 'Get in touch with our experts for a customized solution.' 
+    : '联系我们的专家获取定制化解决方案。',
+  download: lang === 'en' ? 'Download Datasheet' : '下载技术手册',
+  range: lang === 'en' ? 'Range' : '量程',
+  accuracy: lang === 'en' ? 'Accuracy' : '精度',
+  resolution: lang === 'en' ? 'Resolution' : '分辨率',
+  fov: lang === 'en' ? 'Field of View' : '视场角',
+  power: lang === 'en' ? 'Power' : '功耗',
+  weight: lang === 'en' ? 'Weight' : '重量',
+};
 ---
 
 <BaseLayout
@@ -21,82 +39,181 @@ const { name, model, description, specs, features, lang } = product.data;
   description={description}
   lang={lang}
 >
-  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <article class="prose prose-lg max-w-none">
-      <h1>{name}</h1>
-      <p class="text-xl text-gray-600">{description}</p>
-
-      {specs && (
-        <div class="bg-gray-50 rounded-lg p-6 my-8">
-          <h2>{lang === 'en' ? 'Technical Specifications' : '技术规格'}</h2>
-          <dl class="grid grid-cols-2 gap-4">
-            {specs.range && (
-              <>
-                <dt class="font-semibold">{lang === 'en' ? 'Range' : '量程'}</dt>
-                <dd>{specs.range}</dd>
-              </>
-            )}
-            {specs.accuracy && (
-              <>
-                <dt class="font-semibold">{lang === 'en' ? 'Accuracy' : '精度'}</dt>
-                <dd>{specs.accuracy}</dd>
-              </>
-            )}
-            {specs.resolution && (
-              <>
-                <dt class="font-semibold">{lang === 'en' ? 'Resolution' : '分辨率'}</dt>
-                <dd>{specs.resolution}</dd>
-              </>
-            )}
-            {specs.fieldOfView && (
-              <>
-                <dt class="font-semibold">{lang === 'en' ? 'Field of View' : '视场角'}</dt>
-                <dd>{specs.fieldOfView}</dd>
-              </>
-            )}
-            {specs.power && (
-              <>
-                <dt class="font-semibold">{lang === 'en' ? 'Power' : '功耗'}</dt>
-                <dd>{specs.power}</dd>
-              </>
-            )}
-            {specs.weight && (
-              <>
-                <dt class="font-semibold">{lang === 'en' ? 'Weight' : '重量'}</dt>
-                <dd>{specs.weight}</dd>
-              </>
-            )}
-          </dl>
+  {/* Hero Section */}
+  <section class="relative bg-slate-900 text-white overflow-hidden py-24 lg:py-32">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-900/40 via-slate-900 to-slate-900"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 text-sm font-medium mb-6">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+            </span>
+            {model} Series
+          </div>
+          <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
+            {name}
+          </h1>
+          <p class="text-xl text-slate-300 mb-8 leading-relaxed max-w-lg">
+            {description}
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="#contact" class="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl transition-all shadow-lg shadow-blue-600/25 hover:-translate-y-1">
+              {t.contact}
+            </a>
+            <a href="#specs" class="px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl transition-all backdrop-blur-sm hover:-translate-y-1">
+              {t.specs}
+            </a>
+          </div>
+          
+          {/* Quick Stats */}
+          {specs && (
+            <div class="grid grid-cols-3 gap-6 mt-12 pt-12 border-t border-white/10">
+              {specs.range && (
+                <div>
+                  <div class="text-slate-400 text-sm mb-1">{t.range}</div>
+                  <div class="text-2xl font-mono font-bold">{specs.range}</div>
+                </div>
+              )}
+              {specs.accuracy && (
+                <div>
+                  <div class="text-slate-400 text-sm mb-1">{t.accuracy}</div>
+                  <div class="text-2xl font-mono font-bold">{specs.accuracy}</div>
+                </div>
+              )}
+              {specs.weight && (
+                <div>
+                  <div class="text-slate-400 text-sm mb-1">{t.weight}</div>
+                  <div class="text-2xl font-mono font-bold">{specs.weight}</div>
+                </div>
+              )}
+            </div>
+          )}
         </div>
-      )}
-
-      {features && features.length > 0 && (
-        <div class="my-8">
-          <h2>{lang === 'en' ? 'Key Features' : '核心特性'}</h2>
-          <ul>
-            {features.map(feature => <li>{feature}</li>)}
-          </ul>
+        
+        <div class="relative">
+           {/* Image Placeholder / Radar Visualization */}
+           <div class="aspect-square bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl border border-slate-700 flex items-center justify-center relative shadow-2xl overflow-hidden group">
+              <div class="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-20"></div>
+              {/* If real image exists, show it. Else show abstract radar SVG */}
+              {image && image !== '/images/s500-radar.jpg' ? (
+                <img src={image} alt={name} class="w-4/5 h-auto object-contain relative z-10 drop-shadow-2xl transition-transform duration-700 group-hover:scale-105" />
+              ) : (
+                <div class="relative z-10 w-64 h-64">
+                  {/* Abstract Radar SVG */}
+                  <svg viewBox="0 0 200 200" class="w-full h-full text-blue-500 animate-[spin_10s_linear_infinite]">
+                     <circle cx="100" cy="100" r="90" fill="none" stroke="currentColor" stroke-width="1" opacity="0.2" />
+                     <circle cx="100" cy="100" r="60" fill="none" stroke="currentColor" stroke-width="1" opacity="0.4" />
+                     <circle cx="100" cy="100" r="30" fill="none" stroke="currentColor" stroke-width="1" opacity="0.6" />
+                     <path d="M100 100 L190 100 A90 90 0 0 1 100 190" fill="url(#radar-gradient)" opacity="0.5" />
+                     <defs>
+                       <linearGradient id="radar-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                         <stop offset="0%" stop-color="currentColor" stop-opacity="0" />
+                         <stop offset="100%" stop-color="currentColor" stop-opacity="0.8" />
+                       </linearGradient>
+                     </defs>
+                  </svg>
+                  <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="text-slate-500 font-mono text-xs tracking-widest uppercase">S500 Radar</div>
+                  </div>
+                </div>
+              )}
+           </div>
         </div>
-      )}
-
-      <Content />
-    </article>
-
-    <div class="mt-12 bg-blue-600 text-white rounded-lg p-8 text-center">
-      <h3 class="text-2xl font-bold mb-4">
-        {lang === 'en' ? 'Interested in this product?' : '对此产品感兴趣?'}
-      </h3>
-      <p class="mb-6">
-        {lang === 'en'
-          ? 'Contact us to learn more about pricing and deployment options.'
-          : '联系我们了解更多关于价格和部署选项的信息。'}
-      </p>
-      <a
-        href="mailto:info@foresens.com"
-        class="inline-block bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
-      >
-        {lang === 'en' ? 'Contact Sales' : '联系销售'}
-      </a>
+      </div>
     </div>
-  </main>
+  </section>
+
+  {/* Features Grid */}
+  {features && features.length > 0 && (
+    <section class="py-24 bg-slate-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="text-3xl font-bold text-slate-900 mb-4">{t.features}</h2>
+          <div class="h-1 w-20 bg-blue-600 mx-auto rounded-full"></div>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {features.map((feature, index) => (
+            <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 group hover:-translate-y-1">
+              <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              </div>
+              <h3 class="font-bold text-lg text-slate-900">{feature}</h3>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {/* Technical Specs */}
+  {specs && (
+    <section id="specs" class="py-24 bg-slate-900 text-white relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-blue-900/20 to-transparent pointer-events-none"></div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid lg:grid-cols-2 gap-16 items-start">
+          <div>
+            <h2 class="text-3xl font-bold mb-6">{t.specs}</h2>
+            <p class="text-slate-400 mb-8 text-lg">
+              {lang === 'en' 
+                ? 'Engineered for precision and reliability in the most demanding environments.' 
+                : '专为最苛刻环境下的精确性和可靠性而设计。'}
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {Object.entries(specs).map(([key, value]) => (
+                <div class="p-6 rounded-2xl bg-slate-800/50 border border-slate-700 backdrop-blur-sm hover:border-blue-500/50 transition-colors">
+                  <div class="text-sm text-slate-400 mb-1 capitalize">{t[key as keyof typeof t] || key}</div>
+                  <div class="text-xl font-mono font-bold text-white">{value}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div class="relative hidden lg:block h-full min-h-[400px]">
+             {/* Decorative tech graphic */}
+             <div class="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
+             <div class="absolute inset-0 flex items-center justify-center">
+                <div class="w-64 h-64 rounded-full border border-blue-500/30 animate-ping opacity-20"></div>
+                <div class="w-48 h-48 rounded-full border border-blue-500/50 animate-pulse opacity-30 absolute"></div>
+             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  {/* Main Content (MDX) */}
+  <section class="py-24 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <article class="prose prose-lg prose-slate max-w-none 
+        prose-headings:font-bold prose-headings:text-slate-900 
+        prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6 
+        prose-p:text-slate-600 prose-p:leading-relaxed
+        prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline
+        prose-img:rounded-2xl prose-img:shadow-xl
+        prose-table:border prose-table:border-slate-200 prose-table:rounded-lg prose-table:overflow-hidden
+        prose-th:bg-slate-50 prose-th:p-4 prose-th:text-slate-900
+        prose-td:p-4 prose-td:border-t prose-td:border-slate-100">
+        <Content />
+      </article>
+    </div>
+  </section>
+
+  {/* CTA Section */}
+  <section id="contact" class="py-24 bg-gradient-to-br from-blue-600 to-indigo-700 text-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-4xl font-extrabold mb-6">{t.interested}</h2>
+      <p class="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
+        {t.interestedDesc}
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="mailto:info@foresens.com" class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-blue-700 bg-white rounded-xl hover:bg-blue-50 transition-all shadow-xl hover:-translate-y-1">
+          {t.contact}
+        </a>
+        <a href="#" class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white border-2 border-white/30 rounded-xl hover:bg-white/10 transition-all hover:-translate-y-1">
+          {t.download}
+        </a>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
