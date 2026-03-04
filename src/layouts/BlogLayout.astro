@@ -106,17 +106,17 @@ const schema = {
       if (!content) return;
 
       const terms = lang === 'en' ? {
-        'InSAR': 'Interferometric Synthetic Aperture Radar. A technique for mapping ground deformation.',
+        'Real-Aperture Radar': 'A radar system that uses a physical antenna aperture for high-resolution imaging, offering better real-time performance than synthetic aperture systems.',
         'Deformation': 'A change in the shape or dimensions of an object.',
         'S500': 'Kinarray\'s flagship ground-based deformation monitoring radar.',
         'Slope Stability': 'The potential of soil covered slopes to withstand and undergo movement.',
-        'GB-InSAR': 'Ground-Based Interferometric Synthetic Aperture Radar.'
+        'Interferometric Radar': 'A radar technique that measures distance changes by comparing signal phases.'
       } : {
-        'InSAR': '干涉合成孔径雷达。一种用于测绘地面形变的技术。',
+        '实孔径雷达': '使用物理天线孔径进行高分辨率成像的雷达系统，相比合成孔径系统具有更好的实时性。',
         '形变': '物体形状或尺寸的变化。',
         'S500': 'Kinarray 的旗舰地基形变监测雷达。',
         '边坡稳定性': '被土壤覆盖的边坡承受和经受移动的潜力。',
-        'GB-InSAR': '地基干涉合成孔径雷达。'
+        '干涉雷达': '一种通过比较雷达信号相位变化来测量距离变化的雷达技术。'
       };
 
       const walker = document.createTreeWalker(content, NodeFilter.SHOW_TEXT, null, false);
