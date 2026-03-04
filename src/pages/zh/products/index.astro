@@ -17,8 +17,12 @@ const products = await getCollection('products', ({ data }) => data.lang === lan
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {products.map((product) => (
         <a href={`/zh/products/${product.slug}/`} class="block bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition">
-          <div class="bg-gray-200 h-48 flex items-center justify-center">
-            <span class="text-gray-500">产品图片</span>
+          <div class="h-48 overflow-hidden bg-gray-100 flex items-center justify-center">
+            {product.data.image ? (
+              <img src={product.data.image} alt={product.data.name} class="w-full h-full object-contain p-4 hover:scale-105 transition-transform duration-500" />
+            ) : (
+              <span class="text-gray-500">产品图片</span>
+            )}
           </div>
           <div class="p-6">
             <h2 class="text-2xl font-bold mb-2">{product.data.name}</h2>

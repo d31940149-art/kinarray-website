@@ -19,12 +19,11 @@ const { name, model, description, specs, features, lang, image } = product.data;
 const t = {
   specs: lang === 'en' ? 'Technical Specifications' : '技术规格',
   features: lang === 'en' ? 'Key Features' : '核心特性',
-  contact: lang === 'en' ? 'Contact Sales' : '联系销售',
+  contact: lang === 'en' ? 'Contact Technical Support' : '联系技术支持',
   interested: lang === 'en' ? 'Ready to Deploy?' : '准备部署?',
   interestedDesc: lang === 'en' 
     ? 'Get in touch with our experts for a customized solution.' 
     : '联系我们的专家获取定制化解决方案。',
-  download: lang === 'en' ? 'Download Datasheet' : '下载技术手册',
   range: lang === 'en' ? 'Range' : '量程',
   accuracy: lang === 'en' ? 'Accuracy' : '精度',
   resolution: lang === 'en' ? 'Resolution' : '分辨率',
@@ -127,7 +126,7 @@ const t = {
 
   {/* Features Grid */}
   {features && features.length > 0 && (
-    <section class="py-24 bg-slate-50">
+    <section class="py-24 bg-slate-300">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-16">
           <h2 class="text-3xl font-bold text-slate-900 mb-4">{t.features}</h2>
@@ -183,7 +182,7 @@ const t = {
   )}
 
   {/* Main Content (MDX) */}
-  <section class="py-24 bg-white">
+  <section class="py-24 bg-slate-300">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <article class="prose prose-lg prose-slate max-w-none 
         prose-headings:font-bold prose-headings:text-slate-900 
@@ -200,18 +199,15 @@ const t = {
   </section>
 
   {/* CTA Section */}
-  <section id="contact" class="py-24 bg-gradient-to-br from-blue-600 to-indigo-700 text-white">
+  <section id="contact" class="py-24 bg-slate-900 text-white">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h2 class="text-4xl font-extrabold mb-6">{t.interested}</h2>
-      <p class="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
+      <p class="text-xl text-slate-300 mb-10 max-w-2xl mx-auto">
         {t.interestedDesc}
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="mailto:info@foresens.com" class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-blue-700 bg-white rounded-xl hover:bg-blue-50 transition-all shadow-xl hover:-translate-y-1">
+        <a href="mailto:info@foresens.com" class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition-all shadow-xl hover:-translate-y-1">
           {t.contact}
-        </a>
-        <a href="#" class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white border-2 border-white/30 rounded-xl hover:bg-white/10 transition-all hover:-translate-y-1">
-          {t.download}
         </a>
       </div>
     </div>
