@@ -23,6 +23,14 @@ const props = Astro.props;
 <html lang={props.lang}>
 <head>
   <SEO {...props} />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+  </style>
 </head>
 <body class="min-h-screen bg-slate-50 text-slate-900 font-sans">
   <nav class="fixed w-full z-50 top-0 start-0 border-b border-white/10 bg-slate-900/90 backdrop-blur-md transition-all duration-300">

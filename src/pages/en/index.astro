@@ -11,181 +11,205 @@ const lang = 'en';
 >
   <style>
     /* Custom Animations */
-    @keyframes scan {
-      0% { transform: translateY(-100%); opacity: 0; }
-      50% { opacity: 1; }
-      100% { transform: translateY(100%); opacity: 0; }
+    @keyframes scan-radar {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
-    .animate-scan {
-      animation: scan 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    .animate-radar-spin {
+      animation: scan-radar 4s linear infinite;
     }
     
     .glass-card {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.03);
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .hero-gradient {
+      background: radial-gradient(circle at 50% 0%, #1e293b 0%, #0f172a 100%);
     }
   </style>
 
-  <main class="bg-white">
+  <main class="bg-slate-50">
     <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center bg-slate-900 overflow-hidden">
+    <section class="relative min-h-[90vh] flex items-center hero-gradient overflow-hidden pb-20">
       <!-- Background Effects -->
-      <div class="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-20"></div>
-      <div class="absolute inset-0 bg-slate-900/50"></div>
+      <div class="absolute inset-0 bg-[linear-gradient(to_right,#334155_1px,transparent_1px),linear-gradient(to_bottom,#334155_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-10"></div>
       
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-20">
-        <div class="text-center max-w-4xl mx-auto mb-16">
-          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-900/30 border border-blue-500/30 text-blue-400 font-mono text-sm mb-8 animate-fade-in">
-            <span class="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span>
-            Kinarray S500 System Ready
-          </div>
-          <h1 class="text-5xl md:text-7xl font-extrabold text-white tracking-tight mb-8 leading-tight">
-            Highway Slope<br/>
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-200 to-white">Safety Guardian</span>
-          </h1>
-          <p class="text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Designed for complex geological environments. Capturing 0.1mm micro-deformation to identify landslide risks early.
-            <span class="text-orange-500 font-semibold">Protecting every mile of transportation safety.</span>
-          </p>
-          <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="#contact" class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white transition-all duration-200 bg-orange-500 border border-transparent rounded-xl hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 shadow-lg shadow-orange-500/30 hover:-translate-y-1">
-              Request Consultation
-            </a>
-            <a href="/en/products/s500-en/" class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white transition-all duration-200 bg-transparent border-2 border-slate-600 rounded-xl hover:bg-slate-800 hover:border-slate-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500 hover:-translate-y-1">
-              View Specs
-            </a>
-          </div>
-        </div>
+      <!-- Glowing Orbs -->
+      <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-[100px] pointer-events-none"></div>
+      <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-orange-500/10 rounded-full blur-[100px] pointer-events-none"></div>
 
-        <!-- Radar Visual -->
-        <div class="relative max-w-5xl mx-auto mt-12">
-          <div class="aspect-[16/9] bg-slate-800 rounded-t-3xl border border-slate-700 overflow-hidden relative shadow-2xl">
-             <div class="absolute inset-0 bg-gradient-to-b from-blue-500/5 to-transparent"></div>
-             <!-- Simulated Radar UI -->
-             <div class="absolute inset-0 p-8 flex items-end justify-between">
-                <div class="space-y-2">
-                  <div class="flex items-center gap-2 text-xs font-mono text-slate-500">
-                    <span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
-                    SYSTEM ONLINE
-                  </div>
-                  <div class="text-4xl font-mono font-bold text-slate-200">0.00<span class="text-sm text-slate-500">mm</span></div>
-                  <div class="text-xs text-slate-500">Displacement</div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-32">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <!-- Left Content -->
+          <div class="text-left">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-900/40 border border-blue-500/30 text-blue-300 font-mono text-xs mb-8 animate-fade-in backdrop-blur-sm">
+              <span class="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span>
+              Kinarray S500 System Ready
+            </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white tracking-tight mb-8 leading-[1.1]">
+              Slope Safety <br/>
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-200 to-white">Redefined.</span>
+            </h1>
+            <p class="text-xl text-slate-400 mb-10 max-w-2xl leading-relaxed font-light">
+              Designed for complex geological environments. Capturing <strong class="text-white font-medium">0.1mm micro-deformation</strong> to identify risks early.
+              <span class="block mt-2 text-orange-400/90 font-medium">Protecting every mile of transportation safety.</span>
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4">
+              <a href="#contact" class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white transition-all duration-300 bg-gradient-to-r from-orange-500 to-orange-600 border border-transparent rounded-xl hover:from-orange-600 hover:to-orange-700 hover:shadow-lg hover:shadow-orange-500/25 hover:-translate-y-1">
+                Request Consultation
+                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+              </a>
+              <a href="/en/products/s500-en/" class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-slate-300 transition-all duration-300 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 hover:text-white hover:border-white/20 backdrop-blur-sm hover:-translate-y-1">
+                View Specs
+              </a>
+            </div>
+          </div>
+
+          <!-- Right Radar Visual (Upgraded) -->
+          <div class="relative w-full max-w-lg mx-auto lg:ml-auto">
+            <div class="aspect-square relative rounded-full border border-slate-700/50 bg-slate-800/30 backdrop-blur-sm p-4 shadow-2xl shadow-blue-900/20">
+              <!-- Radar Grid -->
+              <div class="absolute inset-0 rounded-full border border-slate-700/30 m-12"></div>
+              <div class="absolute inset-0 rounded-full border border-slate-700/30 m-24"></div>
+              <div class="absolute inset-0 rounded-full border border-slate-700/30 m-36"></div>
+              
+              <!-- Crosshairs -->
+              <div class="absolute top-0 bottom-0 left-1/2 w-px bg-slate-700/30"></div>
+              <div class="absolute left-0 right-0 top-1/2 h-px bg-slate-700/30"></div>
+
+              <!-- Scanning Effect -->
+              <div class="absolute inset-4 rounded-full overflow-hidden">
+                <div class="absolute inset-0 bg-[conic-gradient(from_0deg,transparent_0deg,transparent_270deg,rgba(59,130,246,0.3)_360deg)] animate-radar-spin rounded-full"></div>
+              </div>
+
+              <!-- Data Points -->
+              <div class="absolute top-1/3 left-1/3 w-2 h-2 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.5)]"></div>
+              <div class="absolute bottom-1/4 right-1/3 w-2 h-2 bg-orange-500 rounded-full animate-pulse delay-75 shadow-[0_0_10px_rgba(249,115,22,0.5)]"></div>
+
+              <!-- Center Hub -->
+              <div class="absolute inset-0 m-auto w-4 h-4 bg-blue-500 rounded-full shadow-[0_0_20px_rgba(59,130,246,0.8)] border-2 border-slate-900"></div>
+
+              <!-- Floating Info Card -->
+              <div class="absolute bottom-8 left-0 right-0 mx-auto w-48 bg-slate-900/80 backdrop-blur-md border border-slate-700 rounded-lg p-3 shadow-xl transform translate-y-4">
+                <div class="flex items-center justify-between text-xs mb-1">
+                  <span class="text-slate-400">Target ID</span>
+                  <span class="text-blue-400 font-mono">T-084</span>
                 </div>
-                
-                <!-- Scanning Line -->
-                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-px h-full bg-gradient-to-b from-transparent via-orange-500/50 to-transparent animate-scan"></div>
-                
-                <div class="grid grid-cols-3 gap-8">
-                   <div>
-                     <div class="text-xs text-slate-500 mb-1">Range</div>
-                     <div class="font-mono text-blue-400">500 M</div>
-                   </div>
-                   <div>
-                     <div class="text-xs text-slate-500 mb-1">Frequency</div>
-                     <div class="font-mono text-blue-400">100 Hz</div>
-                   </div>
-                   <div>
-                     <div class="text-xs text-slate-500 mb-1">Status</div>
-                     <div class="font-mono text-green-500">NORMAL</div>
-                   </div>
+                <div class="flex items-center justify-between">
+                   <span class="text-slate-400 text-xs">Deformation</span>
+                   <span class="text-orange-500 font-bold font-mono">0.08mm</span>
                 </div>
-             </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Hazard Context Section -->
-    <section class="py-24 bg-slate-50 relative overflow-hidden">
+    <section class="py-24 bg-white relative overflow-hidden">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div>
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-100 text-orange-600 font-semibold text-xs uppercase tracking-wider mb-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          <div class="order-2 lg:order-1 relative">
+             <div class="aspect-[4/3] rounded-3xl bg-slate-100 overflow-hidden relative shadow-2xl transform rotate-1 border-4 border-white">
+                <img src="/hazard-context.png" alt="Landslide Hazard Illustration" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-900/90 via-slate-900/50 to-transparent p-8 pt-20">
+                  <div class="flex items-center gap-3">
+                    <div class="w-2 h-10 bg-orange-500 rounded-full"></div>
+                    <div>
+                      <div class="text-white font-bold text-xl">Unpredictable Risks</div>
+                      <div class="text-slate-300 text-sm">Need 24/7 Technical Defense</div>
+                    </div>
+                  </div>
+                </div>
+             </div>
+             <!-- Decorative blob -->
+             <div class="absolute -z-10 -bottom-10 -left-10 w-full h-full bg-slate-100 rounded-3xl -rotate-2"></div>
+          </div>
+
+          <div class="order-1 lg:order-2">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 text-orange-600 font-bold text-xs uppercase tracking-wider mb-6 border border-orange-100">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
               Critical Challenge
             </div>
-            <h2 class="text-4xl font-extrabold text-slate-900 mb-6 leading-tight">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-8 leading-tight">
               Slope Hazards:<br/>
-              <span class="text-orange-600">Unbearable Cost of Life & Economy</span>
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-red-500">Unbearable Cost</span>
             </h2>
             <p class="text-lg text-slate-600 mb-8 leading-relaxed">
-              Geological environments along highways are complex, with sudden landslides and collapses. Traditional "manual monitoring" fails to provide 24/7 coverage. Once disaster strikes, it causes traffic paralysis, huge repair costs, and endangers lives.
+              Geological environments along highways are complex, with sudden landslides and collapses. Traditional "manual monitoring" fails to provide 24/7 coverage. 
             </p>
             <div class="grid grid-cols-2 gap-6">
-              <div class="p-6 bg-white rounded-2xl shadow-sm border border-slate-100">
-                <div class="text-3xl font-extrabold text-slate-900 mb-1">40<span class="text-lg text-slate-500">%</span></div>
-                <div class="text-sm text-slate-500">Sudden Geo-Disasters</div>
+              <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100">
+                <div class="text-4xl font-extrabold text-slate-900 mb-1">40<span class="text-xl text-slate-500">%</span></div>
+                <div class="text-sm text-slate-500 font-medium">Sudden Geo-Disasters</div>
               </div>
-              <div class="p-6 bg-white rounded-2xl shadow-sm border border-slate-100">
-                <div class="text-3xl font-extrabold text-orange-500 mb-1">$$$</div>
-                <div class="text-sm text-slate-500">Massive Emergency Costs</div>
+              <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100">
+                <div class="text-4xl font-extrabold text-orange-500 mb-1">$$$</div>
+                <div class="text-sm text-slate-500 font-medium">Massive Emergency Costs</div>
               </div>
             </div>
-          </div>
-          <div class="relative">
-             <div class="aspect-square rounded-3xl bg-slate-200 overflow-hidden relative shadow-lg">
-                <img src="/hazard-context.png" alt="Landslide Hazard Illustration" class="w-full h-full object-cover" />
-                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-900/90 to-transparent p-8">
-                  <div class="text-white font-bold text-lg">Unpredictable Risks</div>
-                  <div class="text-slate-300 text-sm">Need 24/7 Technical Defense</div>
-                </div>
-             </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Core Capabilities Section -->
-    <section class="py-24 bg-white">
+    <section class="py-32 bg-slate-50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-20">
-          <h2 class="text-4xl font-extrabold text-slate-900 mb-4">S500 Core Capabilities</h2>
+          <h2 class="text-4xl font-extrabold text-slate-900 mb-6">S500 Core Capabilities</h2>
           <p class="text-xl text-slate-500">Redefining monitoring standards, making safety accessible.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <!-- Card 1 -->
-          <div class="group p-8 rounded-2xl bg-white border border-slate-100 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-            <div class="w-14 h-14 rounded-xl bg-blue-50 flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors duration-300">
+          <div class="group p-8 rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-400 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+            <div class="w-16 h-16 rounded-2xl bg-blue-50 flex items-center justify-center mb-8 group-hover:bg-blue-600 transition-colors duration-300">
               <svg class="w-8 h-8 text-blue-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
             </div>
-            <h3 class="text-xl font-bold text-slate-900 mb-3">Sub-mm Early Warning</h3>
+            <h3 class="text-xl font-bold text-slate-900 mb-4">Sub-mm Early Warning</h3>
             <p class="text-slate-500 leading-relaxed text-sm">
               Capable of capturing <span class="text-orange-500 font-bold">0.1mm</span> micro-deformations, issuing alerts hours or days before disaster strikes.
             </p>
           </div>
 
           <!-- Card 2 -->
-          <div class="group p-8 rounded-2xl bg-white border border-slate-100 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-            <div class="w-14 h-14 rounded-xl bg-blue-50 flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors duration-300">
+          <div class="group p-8 rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden">
+             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-400 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+            <div class="w-16 h-16 rounded-2xl bg-blue-50 flex items-center justify-center mb-8 group-hover:bg-blue-600 transition-colors duration-300">
               <svg class="w-8 h-8 text-blue-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
             </div>
-            <h3 class="text-xl font-bold text-slate-900 mb-3">24/7 Harsh Env Duty</h3>
+            <h3 class="text-xl font-bold text-slate-900 mb-4">24/7 Harsh Env Duty</h3>
             <p class="text-slate-500 leading-relaxed text-sm">
-              Designed for extreme weather (-40°C to +65°C), rain/snow resistant, fully automated all-weather monitoring without human presence.
+              Designed for extreme weather (-40°C to +65°C), rain/snow resistant, fully automated all-weather monitoring.
             </p>
           </div>
 
           <!-- Card 3 -->
-          <div class="group p-8 rounded-2xl bg-white border border-slate-100 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-            <div class="w-14 h-14 rounded-xl bg-blue-50 flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors duration-300">
+          <div class="group p-8 rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden">
+             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-400 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+            <div class="w-16 h-16 rounded-2xl bg-blue-50 flex items-center justify-center mb-8 group-hover:bg-blue-600 transition-colors duration-300">
               <svg class="w-8 h-8 text-blue-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
             </div>
-            <h3 class="text-xl font-bold text-slate-900 mb-3">Zero Targets Required</h3>
+            <h3 class="text-xl font-bold text-slate-900 mb-4">Zero Targets Required</h3>
             <p class="text-slate-500 leading-relaxed text-sm">
-              Non-contact measurement, <span class="text-blue-600 font-bold">no need to install prisms on dangerous slopes</span>. Plug-and-play, minimizing installation risk.
+              Non-contact measurement, <span class="text-blue-600 font-bold">no need to install prisms</span> on dangerous slopes. Plug-and-play.
             </p>
           </div>
 
           <!-- Card 4 -->
-          <div class="group p-8 rounded-2xl bg-white border border-slate-100 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-            <div class="w-14 h-14 rounded-xl bg-blue-50 flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors duration-300">
+          <div class="group p-8 rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden">
+             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-400 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+            <div class="w-16 h-16 rounded-2xl bg-blue-50 flex items-center justify-center mb-8 group-hover:bg-blue-600 transition-colors duration-300">
               <svg class="w-8 h-8 text-blue-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
             </div>
-            <h3 class="text-xl font-bold text-slate-900 mb-3">Wide Area Coverage</h3>
+            <h3 class="text-xl font-bold text-slate-900 mb-4">Wide Area Coverage</h3>
             <p class="text-slate-500 leading-relaxed text-sm">
-              Single unit covers <span class="text-blue-600 font-bold">500m</span> radius with 100° horizontal field of view, achieving true wide-area monitoring.
+              Single unit covers <span class="text-blue-600 font-bold">500m</span> radius with 100° horizontal field of view.
             </p>
           </div>
         </div>
@@ -193,8 +217,11 @@ const lang = 'en';
     </section>
 
     <!-- Tech Specs Section -->
-    <section class="py-24 bg-slate-900 text-white">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section class="py-24 bg-slate-900 text-white relative overflow-hidden">
+      <!-- Decorator -->
+      <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-blue-900/20 to-transparent pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
           <div>
             <h2 class="text-4xl font-extrabold mb-6">Industrial Grade Reliability</h2>
@@ -203,19 +230,19 @@ const lang = 'en';
             </p>
             
             <div class="grid grid-cols-2 gap-4">
-              <div class="p-6 rounded-2xl bg-slate-800 border border-slate-700">
+              <div class="p-6 rounded-2xl bg-slate-800/50 border border-slate-700 backdrop-blur-sm">
                 <div class="text-sm text-slate-400 mb-2">Operating Temp</div>
                 <div class="text-2xl font-mono font-bold text-white">-40°C ~ +65°C</div>
               </div>
-              <div class="p-6 rounded-2xl bg-slate-800 border border-slate-700">
+              <div class="p-6 rounded-2xl bg-slate-800/50 border border-slate-700 backdrop-blur-sm">
                 <div class="text-sm text-slate-400 mb-2">Protection</div>
                 <div class="text-2xl font-mono font-bold text-white">IP65 / IP67</div>
               </div>
-              <div class="p-6 rounded-2xl bg-slate-800 border border-slate-700">
+              <div class="p-6 rounded-2xl bg-slate-800/50 border border-slate-700 backdrop-blur-sm">
                 <div class="text-sm text-slate-400 mb-2">System Weight</div>
                 <div class="text-2xl font-mono font-bold text-white">&lt; 5 KG</div>
               </div>
-              <div class="p-6 rounded-2xl bg-slate-800 border border-slate-700">
+              <div class="p-6 rounded-2xl bg-slate-800/50 border border-slate-700 backdrop-blur-sm">
                 <div class="text-sm text-slate-400 mb-2">Power Consumption</div>
                 <div class="text-2xl font-mono font-bold text-white">&lt; 20 W</div>
               </div>
@@ -223,9 +250,9 @@ const lang = 'en';
           </div>
           
           <div class="relative flex items-center justify-center">
-            <div class="absolute inset-0 bg-blue-600/20 blur-3xl rounded-full"></div>
+            <div class="absolute inset-0 bg-blue-600/20 blur-[80px] rounded-full"></div>
             <!-- Abstract visualization of robust technology -->
-            <div class="relative z-10 w-full max-w-md bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-3xl p-8">
+            <div class="relative z-10 w-full max-w-md bg-slate-800/80 backdrop-blur-md border border-slate-700 rounded-3xl p-8 shadow-2xl">
                <div class="space-y-6">
                  <div class="flex items-center justify-between border-b border-slate-700 pb-4">
                    <span class="text-slate-400">Principle</span>
@@ -246,7 +273,7 @@ const lang = 'en';
                </div>
                
                <div class="mt-8 pt-8 border-t border-slate-700">
-                 <a href="/en/products/s500-en/" class="flex items-center justify-between w-full p-4 bg-blue-600 hover:bg-blue-500 rounded-xl transition-colors group">
+                 <a href="/en/products/s500-en/" class="flex items-center justify-between w-full p-4 bg-blue-600 hover:bg-blue-500 rounded-xl transition-all group shadow-lg shadow-blue-600/25">
                    <span class="font-bold">Download Tech Manual</span>
                    <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                  </a>
