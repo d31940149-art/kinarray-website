@@ -8,7 +8,7 @@ const { lang } = Astro.props;
 
 <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
   <a
-    href="https://wa.me/1234567890"
+    href="https://wa.me/4915224852892"
     target="_blank"
     rel="noopener noreferrer"
     class="bg-green-500 hover:bg-green-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition"
@@ -20,7 +20,7 @@ const { lang } = Astro.props;
   </a>
 
   <a
-    href="mailto:info@kinarray.com"
+    href="mailto:info@foresens.com"
     class="bg-blue-500 hover:bg-blue-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition"
     aria-label="Email"
   >
@@ -46,8 +46,8 @@ const { lang } = Astro.props;
     <p class="text-sm text-gray-600 mb-2 text-center">
       {lang === 'en' ? 'Scan to add WeChat' : '扫码添加微信'}
     </p>
-    <div class="w-48 h-48 bg-gray-200 flex items-center justify-center text-gray-500 text-xs">
-      {lang === 'en' ? 'QR Code Placeholder' : '二维码占位图'}
+    <div class="w-48 h-48 bg-white flex items-center justify-center">
+      <img src="/wechat.png" alt={lang === 'en' ? 'WeChat QR Code' : '微信二维码'} class="w-full h-full object-contain" />
     </div>
   </div>
 </div>

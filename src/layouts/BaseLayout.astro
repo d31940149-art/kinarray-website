@@ -24,53 +24,88 @@ const props = Astro.props;
 <head>
   <SEO {...props} />
 </head>
-<body class="min-h-screen bg-white text-gray-900">
-  <nav class="bg-white border-b border-gray-200 sticky top-0 z-40">
+<body class="min-h-screen bg-slate-50 text-slate-900 font-sans">
+  <nav class="fixed w-full z-50 top-0 start-0 border-b border-white/10 bg-white/80 backdrop-blur-md transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between h-16 items-center">
-        <a href={`/${props.lang}/`} class="text-2xl font-bold text-blue-600">Kinarray</a>
-        <div class="flex gap-6">
-          <a href={`/${props.lang}/products/`} class="hover:text-blue-600">{props.lang === 'en' ? 'Products' : '产品'}</a>
-          <a href={`/${props.lang}/blog/`} class="hover:text-blue-600">{props.lang === 'en' ? 'Blog' : '博客'}</a>
-          <a href={`/${props.lang}/glossary/`} class="hover:text-blue-600">{props.lang === 'en' ? 'Glossary' : '术语库'}</a>
-          <a href={props.lang === 'en' ? '/zh/' : '/en/'} class="text-gray-500 hover:text-blue-600">
+      <div class="flex justify-between h-20 items-center">
+        <a href={`/${props.lang}/`} class="text-2xl font-extrabold tracking-tight text-blue-600 flex items-center gap-2">
+          <span class="text-3xl">📡</span> Kinarray
+        </a>
+        <div class="hidden md:flex gap-8 items-center font-medium">
+          <a href={`/${props.lang}/products/`} class="text-slate-600 hover:text-blue-600 transition-colors">{props.lang === 'en' ? 'Products' : '产品'}</a>
+          <a href={`/${props.lang}/blog/`} class="text-slate-600 hover:text-blue-600 transition-colors">{props.lang === 'en' ? 'Blog' : '博客'}</a>
+          <a href={`/${props.lang}/glossary/`} class="text-slate-600 hover:text-blue-600 transition-colors">{props.lang === 'en' ? 'Glossary' : '术语库'}</a>
+          <div class="h-4 w-px bg-slate-300 mx-2"></div>
+          <a href={props.lang === 'en' ? '/zh/' : '/en/'} class="text-slate-500 hover:text-blue-600 transition-colors text-sm font-semibold">
             {props.lang === 'en' ? '中文' : 'EN'}
           </a>
         </div>
+        <!-- Mobile menu button placeholder (can be implemented if needed) -->
       </div>
     </div>
   </nav>
 
-  <slot />
+  <div class="pt-20">
+    <slot />
+  </div>
 
   <ContactFloat lang={props.lang} />
 
-  <footer class="bg-gray-900 text-white py-12 mt-20">
+  <footer class="bg-slate-900 text-slate-300 py-16 mt-24 border-t border-slate-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div>
-          <h3 class="text-xl font-bold mb-4">Kinarray</h3>
-          <p class="text-gray-400">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div class="space-y-6">
+          <h3 class="text-2xl font-bold text-white tracking-tight">Kinarray</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
             {props.lang === 'en'
-              ? 'Remote non-contact deformation monitoring radar for highways and railways.'
-              : '远程非接触式公路铁路边坡形变监测雷达。'}
+              ? 'Remote non-contact deformation monitoring radar for highways and railways. Precision safety for critical infrastructure.'
+              : '远程非接触式公路铁路边坡形变监测雷达。为关键基础设施提供毫米级精度的安全保障。'}
           </p>
+          <div class="flex gap-4">
+             <!-- Social icons placeholder -->
+          </div>
         </div>
+        
         <div>
-          <h4 class="font-semibold mb-4">{props.lang === 'en' ? 'Quick Links' : '快速链接'}</h4>
-          <ul class="space-y-2 text-gray-400">
-            <li><a href={`/${props.lang}/products/`} class="hover:text-white">{props.lang === 'en' ? 'Products' : '产品'}</a></li>
-            <li><a href={`/${props.lang}/blog/`} class="hover:text-white">{props.lang === 'en' ? 'Blog' : '博客'}</a></li>
-            <li><a href={`/${props.lang}/glossary/`} class="hover:text-white">{props.lang === 'en' ? 'Glossary' : '术语库'}</a></li>
+          <h4 class="text-white font-bold mb-6 uppercase text-sm tracking-wider">{props.lang === 'en' ? 'Solutions' : '解决方案'}</h4>
+          <ul class="space-y-3 text-sm">
+            <li><a href="#" class="hover:text-blue-400 transition-colors">{props.lang === 'en' ? 'Highway Slopes' : '公路边坡监测'}</a></li>
+            <li><a href="#" class="hover:text-blue-400 transition-colors">{props.lang === 'en' ? 'Railway Safety' : '铁路安全监测'}</a></li>
+            <li><a href="#" class="hover:text-blue-400 transition-colors">{props.lang === 'en' ? 'Open Pit Mines' : '露天矿山监测'}</a></li>
+            <li><a href="#" class="hover:text-blue-400 transition-colors">{props.lang === 'en' ? 'Dam Stability' : '大坝稳定性监测'}</a></li>
           </ul>
         </div>
+
         <div>
-          <h4 class="font-semibold mb-4">{props.lang === 'en' ? 'Contact' : '联系我们'}</h4>
-          <p class="text-gray-400">Email: info@kinarray.com</p>
+          <h4 class="text-white font-bold mb-6 uppercase text-sm tracking-wider">{props.lang === 'en' ? 'Resources' : '资源中心'}</h4>
+          <ul class="space-y-3 text-sm">
+            <li><a href={`/${props.lang}/products/`} class="hover:text-blue-400 transition-colors">{props.lang === 'en' ? 'Product Specs' : '产品规格'}</a></li>
+            <li><a href={`/${props.lang}/blog/`} class="hover:text-blue-400 transition-colors">{props.lang === 'en' ? 'Case Studies' : '成功案例'}</a></li>
+            <li><a href={`/${props.lang}/glossary/`} class="hover:text-blue-400 transition-colors">{props.lang === 'en' ? 'Radar Glossary' : '雷达术语库'}</a></li>
+            <li><a href="#" class="hover:text-blue-400 transition-colors">{props.lang === 'en' ? 'Documentation' : '技术文档'}</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-white font-bold mb-6 uppercase text-sm tracking-wider">{props.lang === 'en' ? 'Contact' : '联系我们'}</h4>
+          <ul class="space-y-4 text-sm">
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-blue-500 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+              <span>info@foresens.com</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-blue-500 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+              <span>{props.lang === 'en' ? 'T3 Building, No.1220, Yuqiao Rd, Shanghai, China' : '中国上海市御桥路1220号T3楼'}</span>
+            </li>
+          </ul>
         </div>
       </div>
-      <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-        <p>&copy; {new Date().getFullYear()} Kinarray. All rights reserved.</p>
+      <div class="border-t border-slate-800 mt-16 pt-8 text-center text-slate-500 text-sm flex flex-col md:flex-row justify-between items-center">
+        <p>&copy; {new Date().getFullYear()} Kinarray Technology. All rights reserved.</p>
+        <div class="flex gap-6 mt-4 md:mt-0">
+          <a href="#" class="hover:text-white transition-colors">{props.lang === 'en' ? 'Privacy Policy' : '隐私政策'}</a>
+          <a href="#" class="hover:text-white transition-colors">{props.lang === 'en' ? 'Terms of Service' : '服务条款'}</a>
+        </div>
       </div>
     </div>
   </footer>

@@ -53,12 +53,30 @@ const schema = {
         </div>
       </header>
 
-      <div class="ai-summary bg-blue-50 border-l-4 border-blue-500 p-6 mb-8">
-        <h2 class="text-xl font-bold mb-2">{lang === 'en' ? 'TL;DR' : '核心要点'}</h2>
-        <slot name="summary" />
+      <div class="ai-summary bg-blue-50/80 border-l-4 border-blue-600 p-6 mb-10 rounded-r-xl shadow-sm relative overflow-hidden">
+        <div class="absolute top-0 right-0 p-4 opacity-10">
+          <svg class="w-24 h-24 text-blue-600" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2M7.5 13A2.5 2.5 0 0 0 5 15.5V17h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V17h2v-1.5a2.5 2.5 0 0 0-2.5-2.5h-4M22 13h-3v4h3v-4M2 13h3v4H2v-4m10-2a3 3 0 0 0-3 3v1h6v-1a3 3 0 0 0-3-3z"/></svg>
+        </div>
+        <div class="flex items-center gap-3 mb-3 relative z-10">
+          <div class="bg-blue-600 text-white p-1.5 rounded-lg">
+             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          </div>
+          <h2 class="text-lg font-extrabold text-blue-900 tracking-tight uppercase">{lang === 'en' ? 'AI Summary' : 'AI 核心摘要'}</h2>
+        </div>
+        <div class="text-blue-900/80 leading-relaxed font-medium relative z-10">
+          <slot name="summary" />
+        </div>
       </div>
 
-      <div class="content">
+      <div class="content prose prose-lg prose-slate max-w-none 
+        prose-headings:font-extrabold prose-headings:tracking-tight prose-headings:text-slate-900
+        prose-h1:text-4xl prose-h1:mb-6
+        prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6 prose-h2:border-b prose-h2:border-slate-200 prose-h2:pb-4
+        prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4 prose-h3:text-slate-800
+        prose-p:text-slate-600 prose-p:leading-8
+        prose-strong:text-slate-900 prose-strong:font-bold
+        prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline
+      ">
         <slot />
       </div>
     </article>
@@ -80,4 +98,81 @@ const schema = {
       </a>
     </div>
   </main>
+
+  <!-- Glossary Tooltip Script -->
+  <script define:vars={{ lang }}>
+    document.addEventListener('DOMContentLoaded', () => {
+      const content = document.querySelector('.prose');
+      if (!content) return;
+
+      const terms = lang === 'en' ? {
+        'InSAR': 'Interferometric Synthetic Aperture Radar. A technique for mapping ground deformation.',
+        'Deformation': 'A change in the shape or dimensions of an object.',
+        'S500': 'Kinarray\'s flagship ground-based deformation monitoring radar.',
+        'Slope Stability': 'The potential of soil covered slopes to withstand and undergo movement.',
+        'GB-InSAR': 'Ground-Based Interferometric Synthetic Aperture Radar.'
+      } : {
+        'InSAR': '干涉合成孔径雷达。一种用于测绘地面形变的技术。',
+        '形变': '物体形状或尺寸的变化。',
+        'S500': 'Kinarray 的旗舰地基形变监测雷达。',
+        '边坡稳定性': '被土壤覆盖的边坡承受和经受移动的潜力。',
+        'GB-InSAR': '地基干涉合成孔径雷达。'
+      };
+
+      const walker = document.createTreeWalker(content, NodeFilter.SHOW_TEXT, null, false);
+      const nodes = [];
+      let node;
+      while (node = walker.nextNode()) {
+        nodes.push(node);
+      }
+
+      nodes.forEach(node => {
+        let text = node.nodeValue;
+        let parent = node.parentNode;
+        if (parent.tagName === 'A' || parent.classList.contains('glossary-term')) return;
+
+        let hasMatch = false;
+        Object.keys(terms).forEach(term => {
+          const regex = new RegExp(`\\b${term}\\b`, 'g'); // Simple word boundary check
+          if (regex.test(text)) {
+            hasMatch = true;
+          }
+        });
+
+        if (hasMatch) {
+          const fragment = document.createDocumentFragment();
+          let lastIndex = 0;
+          const regex = new RegExp(`\\b(${Object.keys(terms).join('|')})\\b`, 'g');
+          
+          text.replace(regex, (match, p1, offset) => {
+            // Text before match
+            fragment.appendChild(document.createTextNode(text.slice(lastIndex, offset)));
+            
+            // The match wrapped in span
+            const span = document.createElement('span');
+            span.className = 'glossary-term relative cursor-help text-blue-600 border-b border-dashed border-blue-400 inline-block group';
+            span.textContent = match;
+            
+            // Tooltip
+            const tooltip = document.createElement('span');
+            tooltip.className = 'invisible group-hover:visible absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 p-3 bg-slate-900 text-white text-xs rounded-lg shadow-xl z-50 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200';
+            tooltip.textContent = terms[p1];
+            
+            // Arrow
+            const arrow = document.createElement('span');
+            arrow.className = 'absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-slate-900';
+            tooltip.appendChild(arrow);
+            
+            span.appendChild(tooltip);
+            fragment.appendChild(span);
+            
+            lastIndex = offset + match.length;
+          });
+          
+          fragment.appendChild(document.createTextNode(text.slice(lastIndex)));
+          parent.replaceChild(fragment, node);
+        }
+      });
+    });
+  </script>
 </BaseLayout>
