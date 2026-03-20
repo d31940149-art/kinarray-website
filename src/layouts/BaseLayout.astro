@@ -100,18 +100,22 @@ const props = Astro.props;
           <h4 class="text-white font-bold mb-6 uppercase text-sm tracking-wider">{props.lang === 'en' ? 'Contact' : '联系我们'}</h4>
           <ul class="space-y-4 text-sm">
             <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-blue-500 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+              <svg class="w-5 h-5 text-blue-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+              <span>{props.lang === 'en' ? 'Shanghai Feixiong Electronic Technology Co. LTD' : '上海非熊电子技术有限责任公司'}</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-blue-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
               <span>info@foresens.com</span>
             </li>
             <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-blue-500 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+              <svg class="w-5 h-5 text-blue-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
               <span>{props.lang === 'en' ? 'T3 Building, No.1220, Yuqiao Rd, Shanghai, China' : '中国上海市御桥路1220号T3楼'}</span>
             </li>
           </ul>
         </div>
       </div>
       <div class="border-t border-slate-800 mt-16 pt-8 text-center text-slate-500 text-sm flex flex-col md:flex-row justify-between items-center">
-        <p>&copy; {new Date().getFullYear()} Kinarray Technology. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Feixiong Electronic Technology. All rights reserved.</p>
         <div class="flex gap-6 mt-4 md:mt-0">
           <a href="#" class="hover:text-white transition-colors">{props.lang === 'en' ? 'Privacy Policy' : '隐私政策'}</a>
           <a href="#" class="hover:text-white transition-colors">{props.lang === 'en' ? 'Terms of Service' : '服务条款'}</a>
