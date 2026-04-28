@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const lang = 'zh';
+---
+
+<BaseLayout
+  title="关于我们 | Kinarray"
+  description="上海非熊电子技术有限责任公司成立于2018年，专注于微形变和微振动成像雷达研发生产，服务边坡及大型结构安全与健康监测。"
+  lang={lang}
+>
+  <main class="bg-slate-50">
+    <section class="relative overflow-hidden bg-slate-900 py-24">
+      <div class="absolute inset-0 bg-[linear-gradient(to_right,#334155_1px,transparent_1px),linear-gradient(to_bottom,#334155_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-10"></div>
+      <div class="absolute -top-20 left-1/4 h-72 w-72 rounded-full bg-blue-600/20 blur-[100px]"></div>
+      <div class="absolute -bottom-16 right-1/4 h-72 w-72 rounded-full bg-orange-500/10 blur-[100px]"></div>
+
+      <div class="relative z-10 mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
+        <p class="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-blue-300">About Us</p>
+        <h1 class="text-4xl font-extrabold leading-tight text-white md:text-5xl">关于非熊电子与 Kinarray</h1>
+        <p class="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-slate-300">
+          上海非熊电子技术有限责任公司成立于2018年，专注于微形变和微振动成像雷达的研发与生产。
+        </p>
+      </div>
+    </section>
+
+    <section class="py-20">
+      <div class="mx-auto grid max-w-6xl gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
+        <article class="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
+          <h2 class="text-2xl font-bold text-slate-900">公司简介</h2>
+          <p class="mt-4 leading-relaxed text-slate-600">
+            公司产品广泛应用于多个行业的隐患边坡监测，以及大型人造建筑的安全监测和健康监测场景。
+            Kinarray 是公司公路边坡雷达的核心品牌。
+          </p>
+        </article>
+
+        <article class="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
+          <h2 class="text-2xl font-bold text-slate-900">技术能力</h2>
+          <p class="mt-4 leading-relaxed text-slate-600">
+            公司技术团队由多名海外和国内顶尖雷达及地质院校背景专家组成，拥有完全自主知识产权。
+            针对公路边坡特点，已成功开发 S500、S1000 等中距和远距边坡形变监测雷达。
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="bg-slate-100 py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm md:p-10">
+          <h2 class="text-2xl font-bold text-slate-900 md:text-3xl">产品优势与合作理念</h2>
+          <p class="mt-5 leading-relaxed text-slate-600">
+            产品具备大面积监测、高精度、低功耗、无需靶标、无需现场调试等优势，已在应用中获得用户好评。
+          </p>
+          <p class="mt-4 leading-relaxed text-slate-600">
+            公司坚持技术创新与质量保障，以诚信为本，重视用户与合作伙伴利益。我们希望与少量价值观一致、有影响力的伙伴深度合作，共同打造边坡雷达行业标杆与安全盾牌。
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
